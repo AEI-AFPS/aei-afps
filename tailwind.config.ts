@@ -58,6 +58,13 @@ export default {
           warning: "hsl(var(--industrial-warning))",
           dark: "hsl(var(--industrial-dark))",
         },
+        phoenix: {
+          DEFAULT: "hsl(var(--phoenix-red))",
+          red: "hsl(var(--phoenix-red))",
+          dark: "hsl(var(--phoenix-dark))",
+          glow: "hsl(var(--phoenix-glow))",
+          ember: "hsl(var(--phoenix-ember))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
