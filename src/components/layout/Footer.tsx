@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import logo from "/logo.png"
 
 const quickLinks = [
   { name: 'Home', path: '/' },
@@ -24,9 +25,10 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+              {/* <div className="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
                 <span className="font-heading font-bold text-primary-foreground text-lg">AEI</span>
-              </div>
+              </div> */}
+              <img src={logo} alt="" className='w-12'/>
               <div>
                 <p className="font-heading font-semibold text-secondary-foreground leading-tight">Associated Engg. Industries</p>
                 <p className="text-xs text-industrial-concrete uppercase tracking-wider">AFPS Division</p>

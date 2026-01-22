@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Mail, Bird } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import logo from '/logo.png'
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -45,13 +46,16 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-4 group">
             {/* Phoenix Logo */}
-            <div className="relative">
-              <div className="w-14 h-14 bg-gradient-to-br from-primary via-phoenix-ember to-phoenix-glow rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-phoenix transition-all duration-300 group-hover:scale-105">
+            {/* <div className="relative"> */}
+              {/* <div className="w-14 h-14 bg-gradient-to-br from-primary via-phoenix-ember to-phoenix-glow rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-phoenix transition-all duration-300 group-hover:scale-105">
                 <Bird className="h-8 w-8 text-white transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" />
+              </div> */}
+              <div> 
+                <img src={logo} alt="" className='w-12' />
               </div>
               {/* Glow effect */}
               <div className="absolute inset-0 w-14 h-14 bg-gradient-to-br from-primary to-phoenix-glow rounded-lg blur-md opacity-40 group-hover:opacity-60 transition-opacity -z-10" />
-            </div>
+            {/* </div> */}
             <div className="hidden sm:block">
               <p className="font-heading text-xl font-bold text-white leading-tight tracking-wide group-hover:text-primary transition-colors">
                 Associated Engg. Industries
@@ -81,7 +85,7 @@ export function Header() {
                 )}
               </Link>
             ))}
-            <Button variant="hero" size="default" asChild className="ml-4 shadow-phoenix">
+            <Button variant="hero" size="default" asChild className="ml-4 hover:shadow-phoenix">
               <Link to="/contact">Get Quote</Link>
             </Button>
           </div>
