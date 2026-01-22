@@ -1,6 +1,6 @@
-import { Layout } from '@/components/layout/Layout';
+import { Layout } from '../components/layout/Layout';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/button';
 import { ArrowRight, Truck, Mountain, Building2, Factory, HardHat, Wrench } from 'lucide-react';
 
 const machineryTypes = [

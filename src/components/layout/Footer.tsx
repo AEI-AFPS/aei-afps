@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import logo from "/logo.png"
 
 const quickLinks = [
-  { name: 'Home', path: '/' },
+  { name: 'Home', path: '/aei-fireguard-systems' },
   { name: 'About Us', path: '/about' },
   { name: 'Products', path: '/products' },
   { name: 'Applications', path: '/applications' },

@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Layout } from '@/components/layout/Layout';
-import { ProductCard } from '@/components/products/ProductCard';
-import { ProductModal } from '@/components/products/ProductModal';
-import { CategoryFilter } from '@/components/products/CategoryFilter';
-import { products, categories, Product } from '@/data/products';
+import { Layout } from '../components/layout/Layout';
+
+import { ProductCard } from '../components/products/ProductCard';
+import { ProductModal } from '../components/products/ProductModal';
+import { CategoryFilter } from '../components/products/CategoryFilter';
+import { products, categories, Product } from '../data/products';
 import { Filter, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from '../components/ui/button';
+import { cn } from '../lib/utils';
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();

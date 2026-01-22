@@ -1,5 +1,5 @@
-import { Layout } from '@/components/layout/Layout';
-import { ContactForm } from '@/components/contact/ContactForm';
+import { Layout } from '../components/layout/Layout';
+import { ContactForm } from '../components/contact/ContactForm';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const Contact = () => {

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Mail, Bird } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../../components/ui/button';
 import logo from '/logo.png'
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 
 const navLinks = [
-  { name: 'Home', path: '/' },
+  { name: 'Home', path: '/aei-fireguard-systems' },
   { name: 'About Us', path: '/about' },
   { name: 'Products', path: '/products' },
   { name: 'Applications', path: '/applications' },

@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Product } from '@/data/products';
-import { Button } from '@/components/ui/button';
+import { Product } from '../../data/products';
+import { Button } from '../../components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from '../../components/ui/dialog';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 
 interface ProductModalProps {

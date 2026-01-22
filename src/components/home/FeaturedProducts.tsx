@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { Button } from '../../components/ui/button';
 import { ArrowRight, Flame, Shield, Radar, Lightbulb } from 'lucide-react';
 
 const categories = [

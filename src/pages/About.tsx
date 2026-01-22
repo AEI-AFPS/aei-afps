@@ -1,5 +1,5 @@
-import { Layout } from '@/components/layout/Layout';
-import { CertificationsBar } from '@/components/home/CertificationsBar';
+import { Layout } from '../components/layout/Layout';
+import { CertificationsBar } from '../components/home/CertificationsBar';
 import { CheckCircle, Target, Eye, Users } from 'lucide-react';
 
 const milestones = [

@@ -1,5 +1,5 @@
-import { Product } from '@/data/products';
-import { Button } from '@/components/ui/button';
+import { Product } from '../../data/products';
+import { Button } from '../../components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 interface ProductCardProps {
