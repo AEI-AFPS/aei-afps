@@ -1,80 +1,267 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Textarea } from '../../components/ui/textarea';
 import { Label } from '../../components/ui/label';
 import { useToast } from '../../hooks/use-toast';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, CheckCircle, AlertCircle, Clock } from 'lucide-react';
+
+/* ── Validation helpers ─────────────────────────────────────────────────── */
+const REGEX_EMAIL = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+const REGEX_PHONE = /^(?:\+91|91|0)?[6-9]\d{9}$/;
+
+function sanitize(str: string): string {
+  return str.trim().replace(/[<>"'&]/g, (c) => {
+    const map: Record<string, string> = { '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '&': '&amp;' };
+    return map[c] ?? c;
+  });
+}
+
+interface FormData {
+  name: string;
+  company: string;
+  phone: string;
+  email: string;
+  message: string;
+  // honeypot — must remain empty
+  website: string;
+}
+
+interface FieldErrors {
+  name?: string;
+  phone?: string;
+  email?: string;
+  message?: string;
+}
+
+const RATE_LIMIT_MS = 30_000; // 30-second cooldown
 
 export function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
+  const [submitted, setSubmitted] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
+  const cooldownRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const lastSubmitRef = useRef<number>(0);
+
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     company: '',
     phone: '',
     email: '',
     message: '',
+    website: '', // honeypot
   });
+  const [errors, setErrors] = useState<FieldErrors>({});
+
+  /* ── Start rate-limit countdown ── */
+  const startCooldown = useCallback(() => {
+    const end = Date.now() + RATE_LIMIT_MS;
+    lastSubmitRef.current = Date.now();
+
+    const tick = () => {
+      const remaining = Math.ceil((end - Date.now()) / 1000);
+      if (remaining > 0) {
+        setCooldown(remaining);
+      } else {
+        setCooldown(0);
+        if (cooldownRef.current) clearInterval(cooldownRef.current);
+      }
+    };
+    tick();
+    cooldownRef.current = setInterval(tick, 1000);
+  }, []);
+
+  /* ── Field-level validation ── */
+  const validate = useCallback((data: FormData): FieldErrors => {
+    const errs: FieldErrors = {};
+
+    const name = sanitize(data.name);
+    if (!name) errs.name = 'Full name is required.';
+    else if (name.length > 100) errs.name = 'Name is too long (max 100 chars).';
+
+    const phone = sanitize(data.phone);
+    if (!phone) errs.phone = 'Phone number is required.';
+    else if (!REGEX_PHONE.test(phone.replace(/\s/g, '')))
+      errs.phone = 'Enter a valid Indian mobile number.';
+
+    const email = sanitize(data.email);
+    if (email && !REGEX_EMAIL.test(email))
+      errs.email = 'Enter a valid email address.';
+
+    const message = sanitize(data.message);
+    if (!message) errs.message = 'Please describe your requirements.';
+    else if (message.length > 2000) errs.message = 'Message too long (max 2000 chars).';
+
+    return errs;
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear field error on edit
+    if (errors[name as keyof FieldErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    /* ── Honeypot check ── */
+    if (formData.website.length > 0) {
+      // Bot detected — silently succeed
+      toast({ title: 'Message sent!', description: 'Thank you, we will be in touch.' });
+      return;
+    }
+
+    /* ── Rate limiting ── */
+    if (cooldown > 0) {
+      toast({
+        title: 'Please wait',
+        description: `You can submit again in ${cooldown} seconds.`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    /* ── Client validation ── */
+    const fieldErrors = validate(formData);
+    if (Object.keys(fieldErrors).length > 0) {
+      setErrors(fieldErrors);
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      // Build CSRF-like timestamp token
+      const token = btoa(`aei-${Date.now()}-${Math.random().toString(36).slice(2)}`);
 
-    toast({
-      title: "Inquiry Submitted!",
-      description: "Thank you for your interest. Our team will contact you shortly.",
-    });
+      // Sanitised payload — ready to POST to backend
+      const payload = {
+        name:    sanitize(formData.name),
+        company: sanitize(formData.company),
+        phone:   sanitize(formData.phone),
+        email:   sanitize(formData.email),
+        message: sanitize(formData.message),
+        _token:  token,
+        _ts:     Date.now(),
+      };
 
-    setFormData({
-      name: '',
-      company: '',
-      phone: '',
-      email: '',
-      message: '',
-    });
-    setIsSubmitting(false);
+      // Simulated submission — replace with real fetch/API call
+      await new Promise<void>((resolve) => setTimeout(resolve, 1200));
+
+      // Log sanitised payload (remove in production — replace with real POST)
+      console.info('[AEI ContactForm] Payload ready for submission:', payload);
+
+      toast({
+        title: '✅ Inquiry Submitted!',
+        description: 'Thank you! Our team will contact you within 24 hours.',
+      });
+
+      setSubmitted(true);
+      setFormData({ name: '', company: '', phone: '', email: '', message: '', website: '' });
+      setErrors({});
+      startCooldown();
+
+    } catch (err) {
+      toast({
+        title: 'Submission Failed',
+        description: 'Something went wrong. Please try again or call us directly.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
+  /* ── Success state ── */
+  if (submitted && cooldown > 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-10 gap-4 text-center">
+        <div className="w-16 h-16 bg-green-500/10 border border-green-500/20 rounded-full flex items-center justify-center">
+          <CheckCircle className="h-8 w-8 text-green-500" />
+        </div>
+        <h3 className="font-heading text-xl font-semibold text-foreground">Message Received!</h3>
+        <p className="text-muted-foreground text-sm max-w-xs">
+          We've received your inquiry and will get back to you within 24 hours.
+        </p>
+        <button
+          onClick={() => setSubmitted(false)}
+          className="mt-2 text-flame-orange text-sm font-medium hover:underline flex items-center gap-1"
+          disabled={cooldown > 0}
+        >
+          {cooldown > 0 ? (
+            <>
+              <Clock className="h-3.5 w-3.5" />
+              Send another in {cooldown}s
+            </>
+          ) : 'Send another message'}
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      {/* ── Honeypot (hidden from real users, bots fill it) ── */}
+      <div className="absolute -top-[9999px] -left-[9999px] aria-hidden" aria-hidden="true" tabIndex={-1}>
+        <label htmlFor="website">Leave this empty</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          value={formData.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
+      {/* Name + Company */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label htmlFor="name">Full Name *</Label>
+        <div className="space-y-1.5">
+          <Label htmlFor="name" className="text-sm font-medium">
+            Full Name <span className="text-flame-crimson">*</span>
+          </Label>
           <Input
             id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="John Doe"
+            maxLength={100}
+            className={errors.name ? 'border-red-500 focus-visible:ring-red-500' : ''}
             required
           />
+          {errors.name && (
+            <p className="text-red-500 text-xs flex items-center gap-1">
+              <AlertCircle className="h-3 w-3" />
+              {errors.name}
+            </p>
+          )}
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="company">Company Name</Label>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="company" className="text-sm font-medium">Company Name</Label>
           <Input
             id="company"
             name="company"
             value={formData.company}
             onChange={handleChange}
             placeholder="ABC Mining Co."
+            maxLength={100}
           />
         </div>
       </div>
 
+      {/* Phone + Email */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label htmlFor="phone">Phone Number *</Label>
+        <div className="space-y-1.5">
+          <Label htmlFor="phone" className="text-sm font-medium">
+            Phone Number <span className="text-flame-crimson">*</span>
+          </Label>
           <Input
             id="phone"
             name="phone"
@@ -82,11 +269,20 @@ export function ContactForm() {
             value={formData.phone}
             onChange={handleChange}
             placeholder="+91 98765 43210"
+            maxLength={15}
+            className={errors.phone ? 'border-red-500 focus-visible:ring-red-500' : ''}
             required
           />
+          {errors.phone && (
+            <p className="text-red-500 text-xs flex items-center gap-1">
+              <AlertCircle className="h-3 w-3" />
+              {errors.phone}
+            </p>
+          )}
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="email">Email Address</Label>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
           <Input
             id="email"
             name="email"
@@ -94,28 +290,62 @@ export function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             placeholder="john@example.com"
+            maxLength={200}
+            className={errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}
           />
+          {errors.email && (
+            <p className="text-red-500 text-xs flex items-center gap-1">
+              <AlertCircle className="h-3 w-3" />
+              {errors.email}
+            </p>
+          )}
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="message">Your Message *</Label>
+      {/* Message */}
+      <div className="space-y-1.5">
+        <Label htmlFor="message" className="text-sm font-medium">
+          Your Message <span className="text-flame-crimson">*</span>
+        </Label>
         <Textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Tell us about your requirements..."
+          placeholder="Tell us about your requirements, machinery type, and quantity needed..."
           rows={5}
+          maxLength={2000}
+          className={errors.message ? 'border-red-500 focus-visible:ring-red-500' : ''}
           required
         />
+        <div className="flex justify-between">
+          {errors.message ? (
+            <p className="text-red-500 text-xs flex items-center gap-1">
+              <AlertCircle className="h-3 w-3" />
+              {errors.message}
+            </p>
+          ) : <span />}
+          <p className="text-muted-foreground/60 text-xs ml-auto">
+            {formData.message.length}/2000
+          </p>
+        </div>
       </div>
 
-      <Button type="submit" variant="hero" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
+      {/* Submit */}
+      <Button
+        type="submit"
+        disabled={isSubmitting || cooldown > 0}
+        className="w-full sm:w-auto bg-gradient-flame border-0 text-white font-semibold px-8 py-3 rounded-xl shadow-flame hover:shadow-glow hover:scale-105 active:scale-100 transition-all duration-200 disabled:opacity-60 disabled:hover:scale-100"
+      >
         {isSubmitting ? (
           <>
             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
             Submitting...
+          </>
+        ) : cooldown > 0 ? (
+          <>
+            <Clock className="mr-2 h-5 w-5" />
+            Wait {cooldown}s
           </>
         ) : (
           <>
@@ -124,6 +354,10 @@ export function ContactForm() {
           </>
         )}
       </Button>
+
+      <p className="text-muted-foreground/60 text-xs">
+        <span className="text-flame-crimson">*</span> Required fields. Your data is handled securely and never shared.
+      </p>
     </form>
   );
 }

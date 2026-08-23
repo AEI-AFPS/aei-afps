@@ -1,58 +1,80 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin } from 'lucide-react';
-import logo from "/logo.png"
+import { Phone, Mail, MapPin, ExternalLink, Flame } from 'lucide-react';
+import logo from '/tiff_logo.jpg';
 
 const quickLinks = [
-  { name: 'Home', path: '/aei-fireguard-systems' },
-  { name: 'About Us', path: '/about' },
-  { name: 'Products', path: '/products' },
+  { name: 'Home',         path: '/' },
+  { name: 'About Us',     path: '/about' },
+  { name: 'Products',     path: '/products' },
   { name: 'Applications', path: '/applications' },
-  { name: 'Contact Us', path: '/contact' },
+  { name: 'Contact Us',   path: '/contact' },
 ];
 
 const productLinks = [
-  { name: 'Fire Protection Systems', path: '/products?category=fire-protection' },
-  { name: 'Safety & Monitoring', path: '/products?category=safety-monitoring' },
-  { name: 'Proximity Detection', path: '/products?category=proximity-detection' },
-  { name: 'Industrial Lighting', path: '/products?category=industrial-lighting' },
+  { name: 'Fire Protection Systems',  path: '/products?category=fire-protection' },
+  { name: 'Safety & Monitoring',      path: '/products?category=safety-monitoring' },
+  { name: 'Proximity Detection',      path: '/products?category=proximity-detection' },
+  { name: 'Industrial Lighting',      path: '/products?category=industrial-lighting' },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-secondary text-secondary-foreground">
-      <div className="container-industrial section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <footer className="bg-navy-dark text-white/80 relative overflow-hidden">
+      {/* Subtle background grid */}
+      <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+
+      {/* Flame accent line at top */}
+      <div className="h-0.5 w-full bg-gradient-flame" />
+
+      {/* ── Main Footer Grid ── */}
+      <div className="container-full py-12 md:py-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-12">
+
           {/* Company Info */}
-          <div className="space-y-4">
+          <div className="space-y-5 lg:col-span-1">
             <div className="flex items-center gap-3">
-              {/* <div className="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
-                <span className="font-heading font-bold text-primary-foreground text-lg">AEI</span>
-              </div> */}
-              <img src={logo} alt="" className='w-12'/>
+              <img src={logo} alt="AEI FireGuard" className="w-12 h-12 object-contain" />
               <div>
-                <p className="font-heading font-semibold text-secondary-foreground leading-tight">Associated Engg. Industries</p>
-                <p className="text-xs text-industrial-concrete uppercase tracking-wider">AFPS Division</p>
+                <p className="font-heading font-semibold text-white text-sm leading-tight">
+                  Associated Engg. Industries
+                </p>
+                <p className="text-[10px] text-flame-orange uppercase tracking-[0.2em] font-medium mt-0.5">
+                  AFPS Division
+                </p>
               </div>
             </div>
-            <p className="text-industrial-concrete text-sm leading-relaxed">
-              India's trusted manufacturer of DGMS-approved Automatic Fire Protection Systems for heavy earth-moving machinery.
+
+            <p className="text-white/50 text-sm leading-relaxed">
+              India's trusted manufacturer of DGMS-approved Automatic Fire Protection
+              Systems for heavy earth-moving machinery.
             </p>
-            <div className="flex gap-3">
-              <span className="px-3 py-1 bg-primary/20 text-primary text-xs font-semibold rounded">ISO 9001</span>
-              <span className="px-3 py-1 bg-primary/20 text-primary text-xs font-semibold rounded">ISO 14001</span>
+
+            <div className="flex gap-2 flex-wrap">
+              {['ISO 9001', 'ISO 14001', 'DGMS'].map((cert) => (
+                <span
+                  key={cert}
+                  className="inline-flex items-center gap-1 px-2.5 py-1 bg-flame-crimson/15 text-flame-orange border border-flame-crimson/25 text-[11px] font-semibold rounded-md"
+                >
+                  <Flame className="h-2.5 w-2.5" />
+                  {cert}
+                </span>
+              ))}
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading text-lg font-semibold mb-4 text-secondary-foreground">Quick Links</h4>
+            <h4 className="font-heading text-base font-semibold mb-4 text-white tracking-wide uppercase">
+              Quick Links
+            </h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-industrial-concrete text-sm hover:text-primary transition-colors"
+                    className="text-white/50 text-sm hover:text-flame-orange transition-colors flex items-center gap-1.5 group"
                   >
+                    <span className="w-1 h-1 bg-flame-crimson/50 rounded-full group-hover:bg-flame-orange transition-colors shrink-0" />
                     {link.name}
                   </Link>
                 </li>
@@ -62,14 +84,17 @@ export function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="font-heading text-lg font-semibold mb-4 text-secondary-foreground">Our Products</h4>
+            <h4 className="font-heading text-base font-semibold mb-4 text-white tracking-wide uppercase">
+              Our Products
+            </h4>
             <ul className="space-y-2">
               {productLinks.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-industrial-concrete text-sm hover:text-primary transition-colors"
+                    className="text-white/50 text-sm hover:text-flame-orange transition-colors flex items-center gap-1.5 group"
                   >
+                    <span className="w-1 h-1 bg-flame-crimson/50 rounded-full group-hover:bg-flame-orange transition-colors shrink-0" />
                     {link.name}
                   </Link>
                 </li>
@@ -77,26 +102,34 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact */}
           <div>
-            <h4 className="font-heading text-lg font-semibold mb-4 text-secondary-foreground">Contact Us</h4>
+            <h4 className="font-heading text-base font-semibold mb-4 text-white tracking-wide uppercase">
+              Contact Us
+            </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-industrial-concrete text-sm">
+                <MapPin className="h-4 w-4 text-flame-orange shrink-0 mt-0.5" />
+                <span className="text-white/50 text-sm leading-relaxed">
                   Uppal Industrial Area,<br />
                   Hyderabad, Telangana 500039
                 </span>
               </li>
               <li>
-                <a href="tel:+919876543210" className="flex items-center gap-3 text-industrial-concrete text-sm hover:text-primary transition-colors">
-                  <Phone className="h-5 w-5 text-primary" />
+                <a
+                  href="tel:+919876543210"
+                  className="flex items-center gap-3 text-white/50 text-sm hover:text-flame-orange transition-colors"
+                >
+                  <Phone className="h-4 w-4 text-flame-orange" />
                   +91 98765 43210
                 </a>
               </li>
               <li>
-                <a href="mailto:info@aei-afps.com" className="flex items-center gap-3 text-industrial-concrete text-sm hover:text-primary transition-colors">
-                  <Mail className="h-5 w-5 text-primary" />
+                <a
+                  href="mailto:info@aei-afps.com"
+                  className="flex items-center gap-3 text-white/50 text-sm hover:text-flame-orange transition-colors"
+                >
+                  <Mail className="h-4 w-4 text-flame-orange" />
                   info@aei-afps.com
                 </a>
               </li>
@@ -105,13 +138,14 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-industrial-dark">
-        <div className="container-industrial py-6 px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-industrial-concrete text-sm text-center md:text-left">
+      {/* ── Bottom Bar ── */}
+      <div className="border-t border-white/5 relative z-10">
+        <div className="container-full py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/35">
+          <p>
             © {new Date().getFullYear()} Associated Engg. Industries. All rights reserved.
           </p>
-          <p className="text-industrial-concrete text-sm">
+          <p className="flex items-center gap-1">
+            <Flame className="h-3 w-3 text-flame-crimson" />
             DGMS Approved Fire Protection Systems
           </p>
         </div>

@@ -16,15 +16,15 @@ interface CategoryFilterProps {
 
 export function CategoryFilter({ selectedCategory, onSelectCategory }: CategoryFilterProps) {
   return (
-    <div className="bg-card rounded-lg p-6 card-shadow">
-      <h3 className="font-heading text-lg font-semibold mb-4">Categories</h3>
-      <div className="space-y-2">
+    <div className="bg-card border border-border/50 rounded-xl p-5">
+      <h3 className="font-heading text-base font-semibold mb-4 uppercase tracking-wide">Categories</h3>
+      <div className="space-y-1.5">
         <button
           onClick={() => onSelectCategory(null)}
           className={cn(
-            "w-full text-left px-4 py-3 rounded-md text-sm font-medium transition-colors",
+            "w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200",
             selectedCategory === null
-              ? "bg-primary text-primary-foreground"
+              ? "bg-gradient-flame text-white shadow-flame"
               : "hover:bg-muted text-muted-foreground hover:text-foreground"
           )}
         >
@@ -37,9 +37,9 @@ export function CategoryFilter({ selectedCategory, onSelectCategory }: CategoryF
               key={category.id}
               onClick={() => onSelectCategory(category.id)}
               className={cn(
-                "w-full text-left px-4 py-3 rounded-md text-sm font-medium transition-colors flex items-center gap-3",
+                "w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-3",
                 selectedCategory === category.id
-                  ? "bg-primary text-primary-foreground"
+                  ? "bg-flame-crimson/15 text-flame-orange border border-flame-crimson/30"
                   : "hover:bg-muted text-muted-foreground hover:text-foreground"
               )}
             >
