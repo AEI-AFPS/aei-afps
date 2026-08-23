@@ -8,17 +8,18 @@ export interface Product {
 }
 
 export const categories = [
-  { id: 'fire-protection', name: 'Fire Protection Systems', icon: 'Flame' },
-  { id: 'safety-monitoring', name: 'Safety & Monitoring', icon: 'Shield' },
-  { id: 'proximity-detection', name: 'Proximity & Detection', icon: 'Radar' },
-  { id: 'industrial-lighting', name: 'Industrial Lighting', icon: 'Lightbulb' },
+  { id: 'fire-protection',     name: 'Fire Detection & Suppression', icon: 'Flame' },
+  { id: 'safety-monitoring',   name: 'Safety & Monitoring',          icon: 'Shield' },
+  { id: 'proximity-detection', name: 'Proximity & Detection',        icon: 'Radar' },
+  { id: 'industrial-lighting', name: 'Industrial Lighting',          icon: 'Lightbulb' },
+  { id: 'advancements',        name: 'Advancements',                 icon: 'Sparkles' },
 ];
 
 export const products: Product[] = [
   {
     id: 'afps-1',
     title: 'Automatic Fire Protection Systems (AFPS)',
-    description: 'Designed for heavy-duty machinery in high-risk environments. Our AFPS systems comply with DGMS guidelines and support early fire suppression to protect operators and equipment.',
+    description: 'Designed for heavy-duty machinery in high-risk environments. Our AFPS systems comply with DGMS guidelines and support early fire detection & suppression to protect operators and equipment.',
     category: 'fire-protection',
     imageUrl: '/placeholder.svg',
     features: [
@@ -27,6 +28,19 @@ export const products: Product[] = [
       'Suitable for all HEMM types',
       'Quick response time',
       'Minimal maintenance required',
+    ],
+  },
+  {
+    id: 'afps-commercial',
+    title: 'AFPS for Commercial Vehicles',
+    description: 'Compact and reliable automatic fire detection & suppression systems designed for commercial vehicles including buses, trucks, and tankers.',
+    category: 'fire-protection',
+    imageUrl: '/placeholder.svg',
+    features: [
+      'DGMS & AIS certified',
+      'Compact design for CV applications',
+      'Dry powder & gaseous agents available',
+      'Automatic and manual activation',
     ],
   },
   {
@@ -70,7 +84,7 @@ export const products: Product[] = [
   },
   {
     id: 'turbo-guard-1',
-    title: 'Turbocharger Guard Systems',
+    title: 'Turbocharger Guard',
     description: 'Protective shields for high-temperature turbocharger components, significantly reducing fire risk in heavy machinery.',
     category: 'safety-monitoring',
     imageUrl: '/placeholder.svg',
@@ -133,12 +147,53 @@ export const products: Product[] = [
       'Long lifespan',
     ],
   },
+  // ── Advancements ──────────────────────────────────────────────────────────
+  {
+    id: 'iot-afps-1',
+    title: 'IoT-Connected AFPS with Cloud Monitoring',
+    description: 'Next-generation AFPS integrated with IoT sensors and a cloud dashboard for real-time remote monitoring of system health, activation events, and service schedules across your entire fleet.',
+    category: 'advancements',
+    imageUrl: '/placeholder.svg',
+    features: [
+      'Real-time remote monitoring via mobile app',
+      'Instant alert notifications (SMS & email)',
+      'Fleet-wide dashboard view',
+      'Predictive maintenance alerts',
+      'Data export for compliance reporting',
+    ],
+  },
+  {
+    id: 'ai-thermal-1',
+    title: 'AI-Powered Thermal Fire Detection',
+    description: 'An advanced thermal imaging camera system with AI anomaly detection that identifies hot spots and potential fire risks before ignition, enabling proactive intervention.',
+    category: 'advancements',
+    imageUrl: '/placeholder.svg',
+    features: [
+      'Detects heat anomalies before ignition',
+      'AI-powered false-alarm suppression',
+      'Integrates with existing AFPS',
+      'Low latency edge processing',
+      'DGMS evaluation in progress',
+    ],
+  },
+  {
+    id: 'quick-connect-1',
+    title: 'Quick-Connect Modular AFPS',
+    description: 'A modular plug-and-play fire protection system designed for rapid field installation and swap-out, dramatically reducing machine downtime during maintenance.',
+    category: 'advancements',
+    imageUrl: '/placeholder.svg',
+    features: [
+      'Tool-free module replacement',
+      'Installation in under 2 hours',
+      'Compatible with all existing AEI AFPS',
+      'Reduces maintenance downtime by 70%',
+      'Field-serviceable design',
+    ],
+  },
 ];
 
-export const getProductsByCategory = (categoryId: string): Product[] => {
-  return products.filter(product => product.category === categoryId);
-};
+export const getProductsByCategory = (categoryId: string): Product[] =>
+  products.filter((product) => product.category === categoryId);
 
-export const getProductById = (id: string): Product | undefined => {
-  return products.find(product => product.id === id);
-};
+export const getProductById = (id: string): Product | undefined =>
+  products.find((product) => product.id === id);

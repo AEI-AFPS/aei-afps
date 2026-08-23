@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Mail, ChevronRight } from 'lucide-react';
 import { Button } from '../../components/ui/button';
-import logo from '/tiff_logo.jpg';
+import logo from '/tiff_logo.png';
 import { cn } from '../../lib/utils';
-import { ThemeToggle } from '../ThemeToggle';
+import { CONTACT_PHONE, CONTACT_EMAIL } from '../../config/contact';
 
 const navLinks = [
   { name: 'Home',         path: '/' },
   { name: 'About Us',     path: '/about' },
   { name: 'Products',     path: '/products' },
+  { name: 'Projects', path: '/projects' },
   { name: 'Applications', path: '/applications' },
   { name: 'Contact',      path: '/contact' },
 ];
@@ -31,18 +32,18 @@ export function Header() {
         <div className="container-full flex items-center justify-between py-1.5 text-xs">
           <div className="hidden md:flex items-center gap-5 text-muted-foreground">
             <a
-              href="tel:+919876543210"
+              href={`tel:${CONTACT_PHONE}`}
               className="flex items-center gap-1.5 hover:text-flame-orange transition-colors"
             >
               <Phone className="h-3 w-3" />
-              +91 98765 43210
+              {CONTACT_PHONE}
             </a>
             <a
-              href="mailto:info@aei-afps.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="flex items-center gap-1.5 hover:text-flame-orange transition-colors"
             >
               <Mail className="h-3 w-3" />
-              info@aei-afps.com
+              {CONTACT_EMAIL}
             </a>
           </div>
           <div className="flex items-center gap-2 ml-auto">
@@ -62,25 +63,18 @@ export function Header() {
             : 'bg-background'
         )}
       >
-        <div className="container-full flex items-center justify-between py-3">
+        <div className="container-full flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative">
               <img
                 src={logo}
                 alt="AEI FireGuard"
-                className="w-10 h-10 object-contain"
+                className="w-20 h-20 object-contain"
               />
               <div className="absolute inset-0 bg-flame-crimson/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <div className="hidden sm:block">
-              <p className="font-heading text-lg font-bold text-foreground leading-tight tracking-wide group-hover:text-flame-orange transition-colors">
-                Associated Engg. Industries
-              </p>
-              <p className="text-[10px] text-flame-orange uppercase tracking-[0.25em] font-semibold">
-                AFPS Division
-              </p>
-            </div>
+
           </Link>
 
           {/* ── Desktop Navigation ── */}
@@ -102,7 +96,6 @@ export function Header() {
                 )}
               </Link>
             ))}
-            <ThemeToggle className="ml-2" />
             <Button
               asChild
               className="ml-3 bg-gradient-flame text-white font-semibold text-sm px-5 py-2 rounded-lg shadow-flame hover:shadow-glow hover:scale-105 transition-all duration-200 border-0"
@@ -116,8 +109,7 @@ export function Header() {
 
           {/* Mobile: show only brand on sm, nothing extra on lg+ */}
           <div className="lg:hidden flex items-center">
-            {/* Theme Toggle for mobile */}
-            <ThemeToggle />
+            {/* Theme Toggle for mobile removed */}
           </div>
         </div>
       </nav>

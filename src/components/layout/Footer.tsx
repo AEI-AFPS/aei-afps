@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ExternalLink, Flame } from 'lucide-react';
-import logo from '/tiff_logo.jpg';
+import logo from '/tiff_logo.png';
 
 const quickLinks = [
   { name: 'Home',         path: '/' },
@@ -11,7 +11,7 @@ const quickLinks = [
 ];
 
 const productLinks = [
-  { name: 'Fire Protection Systems',  path: '/products?category=fire-protection' },
+  { name: 'Fire Detection Systems',  path: '/products?category=fire-protection' },
   { name: 'Safety & Monitoring',      path: '/products?category=safety-monitoring' },
   { name: 'Proximity Detection',      path: '/products?category=proximity-detection' },
   { name: 'Industrial Lighting',      path: '/products?category=industrial-lighting' },
@@ -45,7 +45,7 @@ export function Footer() {
             </div>
 
             <p className="text-muted-foreground text-sm leading-relaxed">
-              India's trusted manufacturer of DGMS-approved Automatic Fire Protection
+              India's trusted manufacturer of DGMS-approved Automatic Fire Detection
               Systems for heavy earth-moving machinery.
             </p>
 
@@ -117,11 +117,11 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+91 79953 28191"
                   className="flex items-center gap-3 text-muted-foreground text-sm hover:text-flame-orange transition-colors"
                 >
                   <Phone className="h-4 w-4 text-flame-orange" />
-                  +91 98765 43210
+                  +91 79953 28191
                 </a>
               </li>
               <li>
@@ -146,7 +146,7 @@ export function Footer() {
           </p>
           <p className="flex items-center gap-1">
             <Flame className="h-3 w-3 text-flame-crimson" />
-            DGMS Approved Fire Protection Systems
+            DGMS Approved Fire Detection & Suppression Systems
           </p>
         </div>
       </div>

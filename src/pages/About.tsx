@@ -3,6 +3,7 @@ import { CertificationsBar } from '../components/home/CertificationsBar';
 import { Testimonials } from '../components/shared/Testimonials';
 import { Globe3DDemo } from '../components/shared/GlobeDemo';
 import { CheckCircle, Target, Eye, Users, Flame } from 'lucide-react';
+import { GlowingEffect } from '../components/ui/glowing-effect';
 
 const milestones = [
   { year: '2000', title: 'Company Founded',       description: 'Established in Hyderabad with a vision to provide safety solutions.' },
@@ -74,20 +75,23 @@ const About = () => {
             </div>
 
             {/* Stats grid */}
-            <div className="bg-card rounded-2xl p-8 border border-border/50 relative overflow-hidden animate-slide-left shadow-elevated">
-              <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
-              <div className="relative grid grid-cols-2 gap-8">
-                {[
-                  { value: '20+',  label: 'Years Experience' },
-                  { value: '1000+',label: 'Installations' },
-                  { value: '100+', label: 'Clients' },
-                  { value: '24/7', label: 'Support' },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <p className="font-heading text-4xl lg:text-5xl font-bold text-gradient-flame">{stat.value}</p>
-                    <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
-                  </div>
-                ))}
+            <div className="relative p-[2px] rounded-2xl md:rounded-3xl animate-slide-left">
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+              <div className="bg-card rounded-2xl p-8 border border-border/50 relative overflow-hidden shadow-elevated h-full">
+                <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+                <div className="relative grid grid-cols-2 gap-8">
+                  {[
+                    { value: '20+',  label: 'Years Experience' },
+                    { value: '1000+',label: 'Installations' },
+                    { value: '100+', label: 'Clients' },
+                    { value: '24/7', label: 'Support' },
+                  ].map((stat) => (
+                    <div key={stat.label} className="text-center">
+                      <p className="font-heading text-4xl lg:text-5xl font-bold text-gradient-flame">{stat.value}</p>
+                      <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -110,14 +114,17 @@ const About = () => {
                 text: 'To protect lives and assets through innovative fire protection technology, delivering reliable solutions that exceed regulatory requirements and customer expectations.',
               },
             ].map((item) => (
-              <div key={item.title} className="group bg-card border border-border/50 rounded-2xl p-8 lg:p-10 hover:shadow-elevated hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-flame-crimson/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-14 h-14 bg-flame-crimson/10 border border-flame-crimson/20 rounded-xl flex items-center justify-center mb-6">
-                  <item.icon className="h-7 w-7 text-flame-crimson" />
+              <div key={item.title} className="relative p-[2px] rounded-2xl md:rounded-3xl hover:-translate-y-2 transition-transform duration-300">
+                <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                <div className="group bg-card border border-border/50 rounded-2xl p-8 lg:p-10 relative overflow-hidden h-full shadow-elevated">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-flame-crimson/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative z-10 w-14 h-14 bg-flame-crimson/10 border border-flame-crimson/20 rounded-xl flex items-center justify-center mb-6">
+                    <item.icon className="h-7 w-7 text-flame-crimson" />
+                  </div>
+                  <h3 className="relative z-10 font-heading text-2xl lg:text-3xl font-semibold mb-4 group-hover:text-flame-crimson transition-colors">{item.title}</h3>
+                  <p className="relative z-10 text-muted-foreground leading-relaxed">{item.text}</p>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-flame group-hover:w-full transition-all duration-500 z-20" />
                 </div>
-                <h3 className="font-heading text-2xl lg:text-3xl font-semibold mb-4 group-hover:text-flame-crimson transition-colors">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{item.text}</p>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-flame group-hover:w-full transition-all duration-500" />
               </div>
             ))}
           </div>
@@ -133,9 +140,12 @@ const About = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {whyPoints.map((item, i) => (
-              <div key={i} className="flex items-start gap-4 p-5 bg-card border border-border/50 rounded-xl hover:border-flame-crimson/30 hover:bg-flame-crimson/3 transition-all duration-200">
-                <CheckCircle className="h-5 w-5 text-flame-orange shrink-0 mt-0.5" />
-                <p className="text-foreground text-sm lg:text-base">{item}</p>
+              <div key={i} className="relative p-[2px] rounded-xl hover:-translate-y-1 transition-transform duration-200">
+                <GlowingEffect spread={20} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                <div className="flex items-start gap-4 p-5 bg-card border border-border/50 rounded-xl relative overflow-hidden h-full z-10">
+                  <CheckCircle className="h-5 w-5 text-flame-orange shrink-0 mt-0.5" />
+                  <p className="text-foreground text-sm lg:text-base">{item}</p>
+                </div>
               </div>
             ))}
           </div>

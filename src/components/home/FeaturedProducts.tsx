@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
-import { ArrowRight, Flame, Shield, Radar, Lightbulb } from 'lucide-react';
+import { ArrowRight, Flame, Shield, Radar, Lightbulb, Sparkles } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { NoiseBackground } from "@/components/ui/noise-background";
 
 const categories = [
   {
@@ -36,6 +37,14 @@ const categories = [
     accent: 'text-flame-gold bg-flame-gold/10 border-flame-gold/20',
     hover: 'group-hover:bg-flame-gold/20 group-hover:border-flame-gold/40',
   },
+  {
+    id: 'advancements',
+    name: 'Advancements',
+    description: 'IoT monitoring, AI thermal detection, and next-gen modular systems',
+    icon: Sparkles,
+    accent: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
+    hover: 'group-hover:bg-violet-500/20 group-hover:border-violet-500/40',
+  },
 ];
 
 export function FeaturedProducts() {
@@ -64,12 +73,22 @@ export function FeaturedProducts() {
               Our <span className="text-gradient-flame">Products</span>
             </h2>
           </div>
-          <Button asChild variant="outline" size="lg" className="shrink-0 self-start lg:self-auto border-flame-crimson/30 text-flame-crimson hover:bg-flame-crimson/10 hover:border-flame-crimson">
+          
+          {/* <Button asChild variant="outline" size="lg" className="shrink-0 self-start lg:self-auto border-flame-crimson/30 text-flame-crimson hover:bg-flame-crimson/10 hover:border-flame-crimson">
             <Link to="/products" className="flex items-center gap-2">
               View All Products
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </Button>
+          </Button> */}
+          <NoiseBackground containerClassName="w-fit p-2 rounded-full" gradientColors={[
+            "rgb(204, 30, 10)",
+            "rgb(244, 122, 32)",
+            "rgb(245, 166, 35)",
+          ]} >
+            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-4 py-2 text-black shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
+              View All Products &rarr;
+            </button>
+          </NoiseBackground>
         </div>
 
         {/* Cards */}

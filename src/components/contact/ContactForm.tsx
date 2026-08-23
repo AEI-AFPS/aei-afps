@@ -5,6 +5,7 @@ import { Textarea } from '../../components/ui/textarea';
 import { Label } from '../../components/ui/label';
 import { useToast } from '../../hooks/use-toast';
 import { Send, Loader2, CheckCircle, AlertCircle, Clock } from 'lucide-react';
+import { CONTACT_EMAIL, WHATSAPP_NUMBER } from '../../config/contact';
 
 /* ── Validation helpers ─────────────────────────────────────────────────── */
 const REGEX_EMAIL = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
@@ -135,29 +136,49 @@ export function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      // Build CSRF-like timestamp token
-      const token = btoa(`aei-${Date.now()}-${Math.random().toString(36).slice(2)}`);
-
-      // Sanitised payload — ready to POST to backend
-      const payload = {
+      const s = {
         name:    sanitize(formData.name),
         company: sanitize(formData.company),
         phone:   sanitize(formData.phone),
         email:   sanitize(formData.email),
         message: sanitize(formData.message),
-        _token:  token,
-        _ts:     Date.now(),
       };
 
-      // Simulated submission — replace with real fetch/API call
-      await new Promise<void>((resolve) => setTimeout(resolve, 1200));
+      // ── 1. WhatsApp deep-link ─────────────────────────────────────────
+      const waText = [
+        `*New Enquiry — AEI FireGuard*`,
+        ``,
+        `*Name:* ${s.name}`,
+        s.company ? `*Company:* ${s.company}` : null,
+        `*Phone:* ${s.phone}`,
+        s.email ? `*Email:* ${s.email}` : null,
+        ``,
+        `*Message:*`,
+        s.message,
+      ].filter(Boolean).join('\n');
 
-      // Log sanitised payload (remove in production — replace with real POST)
-      console.info('[AEI ContactForm] Payload ready for submission:', payload);
+      const waUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(waText)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+      // ── 2. Mailto fallback ────────────────────────────────────────────
+      const mailSubject = `AEI FireGuard Enquiry — ${s.name}${s.company ? ` (${s.company})` : ''}`;
+      const mailBody = [
+        `Name: ${s.name}`,
+        s.company ? `Company: ${s.company}` : null,
+        `Phone: ${s.phone}`,
+        s.email ? `Email: ${s.email}` : null,
+        ``,
+        `Message:`,
+        s.message,
+      ].filter(Boolean).join('\n');
+
+      const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+      // Short delay so WhatsApp tab opens first
+      setTimeout(() => { window.location.href = mailtoUrl; }, 800);
 
       toast({
-        title: '✅ Inquiry Submitted!',
-        description: 'Thank you! Our team will contact you within 24 hours.',
+        title: '✅ Enquiry Sent!',
+        description: 'WhatsApp opened for you. Your email client will open shortly.',
       });
 
       setSubmitted(true);

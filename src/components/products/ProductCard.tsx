@@ -1,5 +1,6 @@
 import { Product } from '../../data/products';
 import { ArrowRight, Flame } from 'lucide-react';
+import { GlowingEffect } from '../ui/glowing-effect';
 
 interface ProductCardProps {
   product: Product;
@@ -8,7 +9,9 @@ interface ProductCardProps {
 
 export function ProductCard({ product, onViewDetails }: ProductCardProps) {
   return (
-    <div className="group bg-card border border-border/50 rounded-2xl overflow-hidden hover:shadow-elevated hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
+    <div className="relative p-[2px] rounded-2xl hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
+      <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+      <div className="group bg-card border border-border/50 rounded-2xl overflow-hidden hover:shadow-elevated flex flex-col h-full relative z-10">
       {/* Image / placeholder */}
       <div className="aspect-[4/3] bg-gradient-to-br from-navy-dark to-navy-light flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-20" />
@@ -40,7 +43,8 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
       </div>
 
       {/* Bottom accent */}
-      <div className="h-0.5 bg-gradient-flame w-0 group-hover:w-full transition-all duration-500" />
+      <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-flame w-0 group-hover:w-full transition-all duration-500 z-20" />
+      </div>
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import { categories } from '../../data/products';
 import { cn } from '../../lib/utils';
-import { Flame, Shield, Radar, Lightbulb } from 'lucide-react';
+import { Flame, Shield, Radar, Lightbulb, Sparkles } from 'lucide-react';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Flame,
   Shield,
   Radar,
   Lightbulb,
+  Sparkles,
 };
 
 interface CategoryFilterProps {

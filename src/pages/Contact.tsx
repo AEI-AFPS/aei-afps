@@ -1,6 +1,7 @@
 import { Layout } from '../components/layout/Layout';
 import { ContactForm } from '../components/contact/ContactForm';
 import { Phone, Mail, MapPin, Clock, MessageSquare } from 'lucide-react';
+import { GlowingEffect } from '../components/ui/glowing-effect';
 
 const contactItems = [
   {
@@ -14,8 +15,8 @@ const contactItems = [
     icon: Phone,
     title: 'Phone',
     content: (
-      <a href="tel:+919876543210" className="hover:text-flame-orange transition-colors">
-        +91 98765 43210
+      <a href="tel:+91 79953 28191" className="hover:text-flame-orange transition-colors">
+        +91 79953 28191
       </a>
     ),
     sub: 'For sales and general inquiries',
@@ -24,7 +25,7 @@ const contactItems = [
     icon: Mail,
     title: 'Email',
     content: (
-      <a href="mailto:info@aei-afps.com" className="hover:text-flame-orange transition-colors">
+      <a href="mailto:manitejagaddam1@gmail.com" className="hover:text-flame-orange transition-colors">
         info@aei-afps.com
       </a>
     ),
@@ -74,14 +75,17 @@ const Contact = () => {
 
               <div className="space-y-5">
                 {contactItems.map((item) => (
-                  <div key={item.title} className="flex items-start gap-4 p-5 bg-card border border-border/50 rounded-xl hover:border-flame-crimson/30 transition-colors">
-                    <div className="w-11 h-11 bg-flame-crimson/10 border border-flame-crimson/20 rounded-lg flex items-center justify-center shrink-0">
-                      <item.icon className="h-5 w-5 text-flame-orange" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground text-sm mb-1">{item.title}</h3>
-                      <div className="text-muted-foreground text-sm">{item.content}</div>
-                      {item.sub && <p className="text-xs text-muted-foreground/70 mt-1">{item.sub}</p>}
+                  <div key={item.title} className="relative p-[2px] rounded-xl hover:-translate-y-1 transition-transform duration-200">
+                    <GlowingEffect spread={20} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                    <div className="flex items-start gap-4 p-5 bg-card border border-border/50 rounded-xl relative overflow-hidden h-full z-10">
+                      <div className="relative z-10 w-11 h-11 bg-flame-crimson/10 border border-flame-crimson/20 rounded-lg flex items-center justify-center shrink-0">
+                        <item.icon className="h-5 w-5 text-flame-orange" />
+                      </div>
+                      <div className="relative z-10">
+                        <h3 className="font-semibold text-foreground text-sm mb-1">{item.title}</h3>
+                        <div className="text-muted-foreground text-sm">{item.content}</div>
+                        {item.sub && <p className="text-xs text-muted-foreground/70 mt-1">{item.sub}</p>}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -89,34 +93,50 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-card border border-border/50 rounded-2xl p-6 md:p-8 lg:p-10 shadow-elevated animate-slide-left relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-flame" />
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-9 h-9 bg-flame-crimson/10 border border-flame-crimson/20 rounded-lg flex items-center justify-center">
-                  <MessageSquare className="h-5 w-5 text-flame-orange" />
+            <div className="relative p-[2px] rounded-2xl animate-slide-left">
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+              <div className="bg-card border border-border/50 rounded-2xl p-6 md:p-8 lg:p-10 shadow-elevated relative overflow-hidden h-full z-10">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-flame z-20" />
+                <div className="relative z-10 flex items-center gap-3 mb-2">
+                  <div className="w-9 h-9 bg-flame-crimson/10 border border-flame-crimson/20 rounded-lg flex items-center justify-center">
+                    <MessageSquare className="h-5 w-5 text-flame-orange" />
+                  </div>
+                  <h2 className="font-heading text-xl md:text-2xl text-foreground">Send Us a Message</h2>
                 </div>
-                <h2 className="font-heading text-xl md:text-2xl text-foreground">Send Us a Message</h2>
+                <p className="relative z-10 text-muted-foreground text-sm mb-6">
+                  Fill out the form below and our team will get back to you shortly.
+                </p>
+                <div className="relative z-10">
+                  <ContactForm />
+                </div>
               </div>
-              <p className="text-muted-foreground text-sm mb-6">
-                Fill out the form below and our team will get back to you shortly.
-              </p>
-              <ContactForm />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Map Placeholder ── */}
-      <section className="h-72 bg-muted/50 relative overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-30" />
-        <div className="w-full h-full flex items-center justify-center relative z-10">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-flame-crimson/15 border border-flame-crimson/25 rounded-full flex items-center justify-center mx-auto mb-4 animate-glow-pulse">
-              <MapPin className="h-8 w-8 text-flame-orange" />
-            </div>
-            <p className="text-foreground/70 font-medium">Uppal Industrial Area, Hyderabad, Telangana</p>
-            <p className="text-muted-foreground text-sm mt-1">Telangana 500039, India</p>
-          </div>
+      {/* ── Interactive Map ── */}
+      <section className="h-[400px] w-full relative overflow-hidden border-t border-border/50">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30456.46746815779!2d78.53982441113283!3d17.40422170000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9eb5ba533cf1%3A0x6431952e46b0a8e8!2sUppal%20Industrial%20Estate%2C%20Uppal%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1714000000000!5m2!1sen!2sin" 
+          className="absolute inset-0 w-full h-full grayscale-[30%]" 
+          style={{ border: 0 }} 
+          allowFullScreen 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        
+        {/* Overlay Button */}
+        <div className="absolute inset-0 pointer-events-none flex items-end justify-center pb-8 z-10">
+          <a 
+            href="https://www.google.com/maps/place/Uppal+Industrial+Estate,+Uppal,+Hyderabad,+Telangana" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 bg-card border border-border/50 text-foreground font-semibold text-sm rounded-full shadow-elevated hover:shadow-glow hover:border-flame-orange hover:-translate-y-1 transition-all duration-300"
+          >
+            <MapPin className="w-5 h-5 text-flame-orange" />
+            Open in Google Maps
+          </a>
         </div>
       </section>
     </Layout>

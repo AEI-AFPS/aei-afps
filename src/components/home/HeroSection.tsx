@@ -44,7 +44,7 @@ function Stat({ value, suffix, label, delay }: { value: number; suffix: string; 
       <div className="font-heading text-4xl xl:text-5xl font-bold text-gradient-flame">
         {count}{suffix}
       </div>
-      <div className="text-white/50 text-sm mt-1 tracking-wide">{label}</div>
+      <div className="text-muted-foreground text-sm mt-1 tracking-wide">{label}</div>
     </div>
   );
 }
@@ -71,7 +71,7 @@ export function HeroSection() {
   }));
 
   return (
-    <section className="relative min-h-[88vh] lg:min-h-[80vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[88vh] lg:min-h-[80vh] flex items-center overflow-hidden w-full">
       {/* ── Background layers ── */}
       <div className="absolute inset-0 gradient-hero" />
 
@@ -117,21 +117,21 @@ export function HeroSection() {
 
           {/* Main heading — full-width, Aceternity text reveal */}
           <h1
-            className="font-heading text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white leading-[1.05] tracking-tight mb-6 animate-fade-up"
+            className="font-heading text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-foreground leading-[1.05] tracking-tight mb-6 animate-fade-up"
             style={{ animationDelay: '100ms' }}
           >
-            Automatic Fire{' '}
+            {/* Automatic Fire{' '} */}
             <span className="text-gradient-flame animate-glow-text">
-              Protection
+              ASSOCIATED ENGG. INDUSTRIES
             </span>
             <br />
-            <span className="text-white/90">Systems for</span>{' '}
-            <span className="text-gradient-flame">HEMM</span>
+            <span className="text-white font-semibold text-6xl">Automatic Fire{' '}</span>{' '}
+            <span className="text-gradient-flame font-semibold text-6xl">Detection & Suppression Systems</span>
           </h1>
 
           {/* Sub-headline */}
           <p
-            className="text-lg md:text-xl lg:text-2xl text-white/55 mb-10 leading-relaxed max-w-3xl animate-fade-up"
+            className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-10 leading-relaxed max-w-3xl animate-fade-up"
             style={{ animationDelay: '200ms' }}
           >
             Protecting mining and construction equipment with cutting-edge fire
@@ -147,10 +147,10 @@ export function HeroSection() {
             {[
               'ISO 9001 Certified',
               'ISO 14001 Certified',
-              '1000+ Installations',
+              '10000+ Installations',
               'Pan-India Service',
             ].map((item) => (
-              <div key={item} className="flex items-center gap-1.5 text-sm text-white/60">
+              <div key={item} className="flex items-center gap-1.5 text-sm text-muted-foreground">
                 <CheckCircle className="h-4 w-4 text-flame-orange shrink-0" />
                 {item}
               </div>
@@ -177,20 +177,19 @@ export function HeroSection() {
 
             <Link
               to="/contact"
-              className="group inline-flex items-center justify-center gap-2 px-8 py-4 glass border border-white/20 text-white font-semibold text-base rounded-xl hover:border-flame-orange/50 hover:bg-white/10 transition-all duration-200"
+              className="group inline-flex items-center justify-center gap-2 px-8 py-4 glass border border-foreground/20 text-foreground font-semibold text-base rounded-xl hover:border-flame-orange/50 hover:bg-foreground/5 transition-all duration-200"
             >
               <Zap className="h-5 w-5 text-flame-orange" />
               Request a Quote
             </Link>
           </div>
 
-          {/* ── Stats row ── */}
           <div
-            className="mt-16 pt-10 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-8 animate-fade-up"
+            className="mt-16 pt-10 border-t border-foreground/10 grid grid-cols-2 sm:grid-cols-4 gap-8 animate-fade-up"
             style={{ animationDelay: '500ms' }}
           >
             <Stat value={20}   suffix="+" label="Years Experience" delay={0} />
-            <Stat value={1000} suffix="+" label="Installations"    delay={100} />
+            <Stat value={10000} suffix="+" label="Installations"    delay={100} />
             <Stat value={100}  suffix="+" label="Clients Served"   delay={200} />
             <Stat value={24}   suffix="/7" label="Support"         delay={300} />
           </div>

@@ -4,8 +4,9 @@ import { Layout } from '../components/layout/Layout';
 import { ProductCard } from '../components/products/ProductCard';
 import { ProductModal } from '../components/products/ProductModal';
 import { CategoryFilter } from '../components/products/CategoryFilter';
-import { products, categories, Product } from '../data/products';
-import { Filter, X, Package } from 'lucide-react';
+import { products as staticProducts, categories, Product } from '../data/products';
+import { useProducts } from '../lib/store';
+import { Filter, X, Package, Loader2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { cn } from '../lib/utils';
 
@@ -16,6 +17,9 @@ const Products = () => {
   );
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const { data: storeProducts, isLoading } = useProducts();
+  const allProducts = storeProducts && storeProducts.length > 0 ? storeProducts : staticProducts;
 
   useEffect(() => {
     const category = searchParams.get('category');
@@ -33,12 +37,13 @@ const Products = () => {
   };
 
   const filteredProducts = selectedCategory
-    ? products.filter((p) => p.category === selectedCategory)
-    : products;
+    ? allProducts.filter((p) => p.category === selectedCategory)
+    : allProducts;
 
   const currentCategory = categories.find((c) => c.id === selectedCategory);
 
   return (
+
     <Layout>
       {/* ── Hero ── */}
       <section className="relative bg-navy-dark py-14 md:py-20 overflow-hidden">
@@ -50,7 +55,7 @@ const Products = () => {
             Our <span className="text-gradient-flame">Products</span>
           </h1>
           <p className="text-lg text-white/55 max-w-2xl animate-fade-up delay-200">
-            Comprehensive range of safety and fire protection solutions for heavy earth-moving machinery.
+            Comprehensive range of safety and fire detection & suppression solutions for heavy earth-moving machinery.
           </p>
         </div>
       </section>
