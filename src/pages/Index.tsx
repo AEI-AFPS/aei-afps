@@ -4,6 +4,7 @@ import { WhyAEI } from '../components/home/WhyAEI';
 import { CertificationsBar } from '../components/home/CertificationsBar';
 import { FeaturedProducts } from '../components/home/FeaturedProducts';
 import { CTASection } from '../components/home/CTASection';
+import { Testimonials } from '../components/shared/Testimonials';
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <WhyAEI />
       <CertificationsBar />
       <FeaturedProducts />
+      <Testimonials />
       <CTASection />
     </Layout>
   );

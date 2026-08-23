@@ -8,7 +8,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product, onViewDetails }: ProductCardProps) {
   return (
-    <div className="group bg-card border border-border/50 rounded-2xl overflow-hidden hover-lift card-beam transition-all duration-300 flex flex-col h-full">
+    <div className="group bg-card border border-border/50 rounded-2xl overflow-hidden hover:shadow-elevated hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
       {/* Image / placeholder */}
       <div className="aspect-[4/3] bg-gradient-to-br from-navy-dark to-navy-light flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-20" />

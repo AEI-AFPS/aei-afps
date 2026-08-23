@@ -4,6 +4,7 @@ import { Phone, Mail, ChevronRight } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import logo from '/tiff_logo.jpg';
 import { cn } from '../../lib/utils';
+import { ThemeToggle } from '../ThemeToggle';
 
 const navLinks = [
   { name: 'Home',         path: '/' },
@@ -26,9 +27,9 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full">
       {/* ── Top Bar ──────────────────────────────────────────────────────── */}
-      <div className="bg-navy-dark border-b border-white/5">
+      <div className="bg-muted border-b border-border">
         <div className="container-full flex items-center justify-between py-1.5 text-xs">
-          <div className="hidden md:flex items-center gap-5 text-white/60">
+          <div className="hidden md:flex items-center gap-5 text-muted-foreground">
             <a
               href="tel:+919876543210"
               className="flex items-center gap-1.5 hover:text-flame-orange transition-colors"
@@ -46,8 +47,8 @@ export function Header() {
           </div>
           <div className="flex items-center gap-2 ml-auto">
             <span className="text-flame-crimson font-semibold">DGMS Approved</span>
-            <span className="text-white/30">|</span>
-            <span className="text-white/50">20+ Years of Excellence</span>
+            <span className="text-muted-foreground/30">|</span>
+            <span className="text-muted-foreground">20+ Years of Excellence</span>
           </div>
         </div>
       </div>
@@ -55,10 +56,10 @@ export function Header() {
       {/* ── Main Nav ─────────────────────────────────────────────────────── */}
       <nav
         className={cn(
-          'w-full transition-all duration-300',
+          'w-full transition-all duration-300 border-b border-transparent',
           scrolled
-            ? 'glass-dark shadow-lg'
-            : 'bg-gradient-to-r from-navy-dark via-navy-mid to-navy-dark'
+            ? 'bg-background/80 backdrop-blur-md shadow-sm border-border/50'
+            : 'bg-background'
         )}
       >
         <div className="container-full flex items-center justify-between py-3">
@@ -73,7 +74,7 @@ export function Header() {
               <div className="absolute inset-0 bg-flame-crimson/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="hidden sm:block">
-              <p className="font-heading text-lg font-bold text-white leading-tight tracking-wide group-hover:text-flame-orange transition-colors">
+              <p className="font-heading text-lg font-bold text-foreground leading-tight tracking-wide group-hover:text-flame-orange transition-colors">
                 Associated Engg. Industries
               </p>
               <p className="text-[10px] text-flame-orange uppercase tracking-[0.25em] font-semibold">
@@ -91,8 +92,8 @@ export function Header() {
                 className={cn(
                   'relative font-medium text-sm uppercase tracking-wide px-3 xl:px-4 py-2 rounded-md transition-all duration-200',
                   location.pathname === link.path
-                    ? 'text-flame-orange bg-white/8'
-                    : 'text-white/80 hover:text-flame-orange hover:bg-white/5'
+                    ? 'text-flame-orange bg-muted'
+                    : 'text-foreground/80 hover:text-flame-orange hover:bg-muted/50'
                 )}
               >
                 {link.name}
@@ -101,6 +102,7 @@ export function Header() {
                 )}
               </Link>
             ))}
+            <ThemeToggle className="ml-2" />
             <Button
               asChild
               className="ml-3 bg-gradient-flame text-white font-semibold text-sm px-5 py-2 rounded-lg shadow-flame hover:shadow-glow hover:scale-105 transition-all duration-200 border-0"
@@ -113,8 +115,9 @@ export function Header() {
           </div>
 
           {/* Mobile: show only brand on sm, nothing extra on lg+ */}
-          <div className="lg:hidden">
-            {/* Mobile nav is handled by MobileBottomNav — no hamburger needed */}
+          <div className="lg:hidden flex items-center">
+            {/* Theme Toggle for mobile */}
+            <ThemeToggle />
           </div>
         </div>
       </nav>

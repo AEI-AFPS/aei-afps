@@ -53,7 +53,7 @@ function Stat({ value, suffix, label, delay }: { value: number; suffix: string; 
 function Particle({ style }: { style: React.CSSProperties }) {
   return (
     <div
-      className="absolute rounded-full bg-gradient-flame opacity-0"
+      className="absolute rounded-full bg-gradient-flame opacity-100 z-1 pointer-events-none "
       style={style}
     />
   );

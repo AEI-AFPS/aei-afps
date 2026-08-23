@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/aei/",
+  base: "/aei-fireguard-systems/",
   plugins: [react()],
   resolve: {
     alias: {

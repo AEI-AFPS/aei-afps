@@ -19,7 +19,7 @@ const productLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-navy-dark text-white/80 relative overflow-hidden">
+    <footer className="bg-muted text-muted-foreground relative overflow-hidden">
       {/* Subtle background grid */}
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
 
@@ -35,7 +35,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <img src={logo} alt="AEI FireGuard" className="w-12 h-12 object-contain" />
               <div>
-                <p className="font-heading font-semibold text-white text-sm leading-tight">
+                <p className="font-heading font-semibold text-foreground text-sm leading-tight">
                   Associated Engg. Industries
                 </p>
                 <p className="text-[10px] text-flame-orange uppercase tracking-[0.2em] font-medium mt-0.5">
@@ -44,7 +44,7 @@ export function Footer() {
               </div>
             </div>
 
-            <p className="text-white/50 text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed">
               India's trusted manufacturer of DGMS-approved Automatic Fire Protection
               Systems for heavy earth-moving machinery.
             </p>
@@ -64,7 +64,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading text-base font-semibold mb-4 text-white tracking-wide uppercase">
+            <h4 className="font-heading text-base font-semibold mb-4 text-foreground tracking-wide uppercase">
               Quick Links
             </h4>
             <ul className="space-y-2">
@@ -72,7 +72,7 @@ export function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-white/50 text-sm hover:text-flame-orange transition-colors flex items-center gap-1.5 group"
+                    className="text-muted-foreground text-sm hover:text-flame-orange transition-colors flex items-center gap-1.5 group"
                   >
                     <span className="w-1 h-1 bg-flame-crimson/50 rounded-full group-hover:bg-flame-orange transition-colors shrink-0" />
                     {link.name}
@@ -84,7 +84,7 @@ export function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="font-heading text-base font-semibold mb-4 text-white tracking-wide uppercase">
+            <h4 className="font-heading text-base font-semibold mb-4 text-foreground tracking-wide uppercase">
               Our Products
             </h4>
             <ul className="space-y-2">
@@ -92,7 +92,7 @@ export function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-white/50 text-sm hover:text-flame-orange transition-colors flex items-center gap-1.5 group"
+                    className="text-muted-foreground text-sm hover:text-flame-orange transition-colors flex items-center gap-1.5 group"
                   >
                     <span className="w-1 h-1 bg-flame-crimson/50 rounded-full group-hover:bg-flame-orange transition-colors shrink-0" />
                     {link.name}
@@ -104,13 +104,13 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-heading text-base font-semibold mb-4 text-white tracking-wide uppercase">
+            <h4 className="font-heading text-base font-semibold mb-4 text-foreground tracking-wide uppercase">
               Contact Us
             </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-flame-orange shrink-0 mt-0.5" />
-                <span className="text-white/50 text-sm leading-relaxed">
+                <span className="text-muted-foreground text-sm leading-relaxed">
                   Uppal Industrial Area,<br />
                   Hyderabad, Telangana 500039
                 </span>
@@ -118,7 +118,7 @@ export function Footer() {
               <li>
                 <a
                   href="tel:+919876543210"
-                  className="flex items-center gap-3 text-white/50 text-sm hover:text-flame-orange transition-colors"
+                  className="flex items-center gap-3 text-muted-foreground text-sm hover:text-flame-orange transition-colors"
                 >
                   <Phone className="h-4 w-4 text-flame-orange" />
                   +91 98765 43210
@@ -127,7 +127,7 @@ export function Footer() {
               <li>
                 <a
                   href="mailto:info@aei-afps.com"
-                  className="flex items-center gap-3 text-white/50 text-sm hover:text-flame-orange transition-colors"
+                  className="flex items-center gap-3 text-muted-foreground text-sm hover:text-flame-orange transition-colors"
                 >
                   <Mail className="h-4 w-4 text-flame-orange" />
                   info@aei-afps.com
@@ -139,8 +139,8 @@ export function Footer() {
       </div>
 
       {/* ── Bottom Bar ── */}
-      <div className="border-t border-white/5 relative z-10">
-        <div className="container-full py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/35">
+      <div className="border-t border-border/20 relative z-10">
+        <div className="container-full py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground/60">
           <p>
             © {new Date().getFullYear()} Associated Engg. Industries. All rights reserved.
           </p>

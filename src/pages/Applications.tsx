@@ -71,7 +71,7 @@ const Applications = () => {
             {machineryTypes.map((m, i) => (
               <div
                 key={m.name}
-                className="group bg-card border border-border/50 rounded-xl p-4 text-center hover:border-flame-crimson/40 hover:bg-flame-crimson/3 hover-lift transition-all duration-200 animate-fade-up card-beam"
+                className="group bg-card border border-border/50 rounded-xl p-4 text-center hover:border-flame-crimson/40 hover:bg-flame-crimson/3 hover:shadow-elevated hover:-translate-y-2 transition-all duration-200 animate-fade-up"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <div className="w-12 h-12 bg-flame-crimson/10 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-flame-crimson/20 transition-colors">
@@ -93,7 +93,7 @@ const Applications = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {sectors.map((sector, i) => (
-              <div key={sector.name} className="group bg-card border border-border/50 rounded-2xl p-8 card-beam hover-lift animate-fade-up relative overflow-hidden" style={{ animationDelay: `${i * 120}ms` }}>
+              <div key={sector.name} className="group bg-card border border-border/50 rounded-2xl p-8 hover:shadow-elevated hover:-translate-y-2 transition-all duration-300 animate-fade-up relative overflow-hidden" style={{ animationDelay: `${i * 120}ms` }}>
                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 border ${sector.color}`}>
                   <sector.icon className="h-7 w-7" />
                 </div>

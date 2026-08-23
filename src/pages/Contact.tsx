@@ -43,15 +43,15 @@ const Contact = () => {
   return (
     <Layout>
       {/* ── Hero ── */}
-      <section className="relative bg-navy-dark py-16 md:py-24 overflow-hidden">
+      <section className="relative bg-background py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
         <div className="h-0.5 w-full bg-gradient-flame absolute top-0" />
         <div className="container-full relative z-10">
           <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">Get In Touch</p>
-          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-white mb-5 animate-fade-up leading-tight">
+          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground mb-5 animate-fade-up leading-tight">
             Contact <span className="text-gradient-flame">Us</span>
           </h1>
-          <p className="text-lg text-white/55 max-w-2xl animate-fade-up delay-200">
+          <p className="text-lg text-muted-foreground max-w-2xl animate-fade-up delay-200">
             Get in touch with our team for inquiries, quotes, or technical support.
           </p>
         </div>
@@ -89,7 +89,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-card border border-border/50 rounded-2xl p-6 md:p-8 lg:p-10 shadow-card animate-slide-left relative overflow-hidden card-beam">
+            <div className="bg-card border border-border/50 rounded-2xl p-6 md:p-8 lg:p-10 shadow-elevated animate-slide-left relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-flame" />
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-9 h-9 bg-flame-crimson/10 border border-flame-crimson/20 rounded-lg flex items-center justify-center">
@@ -107,15 +107,15 @@ const Contact = () => {
       </section>
 
       {/* ── Map Placeholder ── */}
-      <section className="h-72 bg-navy-dark relative overflow-hidden">
+      <section className="h-72 bg-muted/50 relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-30" />
         <div className="w-full h-full flex items-center justify-center relative z-10">
           <div className="text-center">
             <div className="w-16 h-16 bg-flame-crimson/15 border border-flame-crimson/25 rounded-full flex items-center justify-center mx-auto mb-4 animate-glow-pulse">
               <MapPin className="h-8 w-8 text-flame-orange" />
             </div>
-            <p className="text-white/70 font-medium">Uppal Industrial Area, Hyderabad, Telangana</p>
-            <p className="text-white/40 text-sm mt-1">Telangana 500039, India</p>
+            <p className="text-foreground/70 font-medium">Uppal Industrial Area, Hyderabad, Telangana</p>
+            <p className="text-muted-foreground text-sm mt-1">Telangana 500039, India</p>
           </div>
         </div>
       </section>

@@ -374,11 +374,10 @@
     background-size: 40px 40px, 70px 70px;
   }
 
-  /* ── Grid line background (Aceternity) ── */
   .grid-bg {
     background-image:
-      linear-gradient(hsl(218 28% 100% / 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(218 28% 100% / 0.03) 1px, transparent 1px);
+      linear-gradient(hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 

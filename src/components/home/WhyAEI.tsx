@@ -64,7 +64,7 @@ export function WhyAEI() {
               key={feature.title}
               className={`
                 relative group bg-card border border-border/50 rounded-2xl p-6 lg:p-7
-                hover-lift card-beam overflow-hidden cursor-default
+                hover:shadow-elevated hover:-translate-y-2 overflow-hidden transition-all duration-300
                 ${visible ? 'animate-fade-up' : 'opacity-0'}
               `}
               style={{ animationDelay: `${index * 120}ms` }}

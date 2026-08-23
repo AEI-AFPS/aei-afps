@@ -1,5 +1,7 @@
 import { Layout } from '../components/layout/Layout';
 import { CertificationsBar } from '../components/home/CertificationsBar';
+import { Testimonials } from '../components/shared/Testimonials';
+import { Globe3DDemo } from '../components/shared/GlobeDemo';
 import { CheckCircle, Target, Eye, Users, Flame } from 'lucide-react';
 
 const milestones = [
@@ -23,7 +25,7 @@ const About = () => {
   return (
     <Layout>
       {/* ── Hero ── */}
-      <section className="relative bg-navy-dark py-16 md:py-24 overflow-hidden">
+      <section className="relative bg-background py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
         <div
           className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none"
@@ -35,10 +37,10 @@ const About = () => {
           <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">
             Who We Are
           </p>
-          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-white mb-5 animate-fade-up leading-tight">
+          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground mb-5 animate-fade-up leading-tight">
             About <span className="text-gradient-flame">Associated Engg.</span>
           </h1>
-          <p className="text-lg text-white/55 max-w-3xl animate-fade-up delay-200">
+          <p className="text-lg text-muted-foreground max-w-3xl animate-fade-up delay-200">
             India's trusted partner for automatic fire protection systems in the mining and construction industry.
           </p>
         </div>
@@ -72,7 +74,7 @@ const About = () => {
             </div>
 
             {/* Stats grid */}
-            <div className="bg-navy-dark rounded-2xl p-8 border border-white/8 relative overflow-hidden animate-slide-left">
+            <div className="bg-card rounded-2xl p-8 border border-border/50 relative overflow-hidden animate-slide-left shadow-elevated">
               <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
               <div className="relative grid grid-cols-2 gap-8">
                 {[
@@ -83,7 +85,7 @@ const About = () => {
                 ].map((stat) => (
                   <div key={stat.label} className="text-center">
                     <p className="font-heading text-4xl lg:text-5xl font-bold text-gradient-flame">{stat.value}</p>
-                    <p className="text-sm text-white/50 mt-2">{stat.label}</p>
+                    <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -108,7 +110,7 @@ const About = () => {
                 text: 'To protect lives and assets through innovative fire protection technology, delivering reliable solutions that exceed regulatory requirements and customer expectations.',
               },
             ].map((item) => (
-              <div key={item.title} className="group bg-card border border-border/50 rounded-2xl p-8 lg:p-10 card-beam hover-lift relative overflow-hidden">
+              <div key={item.title} className="group bg-card border border-border/50 rounded-2xl p-8 lg:p-10 hover:shadow-elevated hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-flame-crimson/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="w-14 h-14 bg-flame-crimson/10 border border-flame-crimson/20 rounded-xl flex items-center justify-center mb-6">
                   <item.icon className="h-7 w-7 text-flame-crimson" />
@@ -141,12 +143,12 @@ const About = () => {
       </section>
 
       {/* ── Timeline ── */}
-      <section className="section-padding bg-navy-dark relative overflow-hidden">
+      <section className="section-padding bg-muted/40 relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
         <div className="container-full relative z-10">
           <div className="text-center mb-12">
             <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3">Company History</p>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-white">Our Journey</h2>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground">Our Journey</h2>
           </div>
 
           <div className="max-w-4xl mx-auto">
@@ -161,14 +163,30 @@ const About = () => {
                   )}
                 </div>
                 <div className="pb-8 pt-2">
-                  <h3 className="font-heading text-lg lg:text-xl font-semibold text-white group-hover:text-flame-orange transition-colors">{milestone.title}</h3>
-                  <p className="text-white/50 mt-1 text-sm lg:text-base">{milestone.description}</p>
+                  <h3 className="font-heading text-lg lg:text-xl font-semibold text-foreground group-hover:text-flame-orange transition-colors">{milestone.title}</h3>
+                  <p className="text-muted-foreground mt-1 text-sm lg:text-base">{milestone.description}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ── Global Presence ── */}
+      <section className="section-padding">
+        <div className="container-full">
+          <div className="text-center mb-12">
+            <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3">Global Reach</p>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground">Where Our Products Are</h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-base lg:text-lg">
+              Our advanced fire protection systems are securing heavy machinery across various international mining and construction hubs.
+            </p>
+          </div>
+          <Globe3DDemo />
+        </div>
+      </section>
+
+      <Testimonials />
 
       <CertificationsBar />
     </Layout>

@@ -147,6 +147,11 @@ export default {
           "0%":   { transform: "scale(1)", opacity: "0.3" },
           "100%": { transform: "scale(2.5)", opacity: "0" },
         },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -159,6 +164,7 @@ export default {
         spotlight:        "spotlight 2s ease forwards",
         "border-beam":    "border-beam 3s linear infinite",
         ripple:           "ripple 1.5s ease-out infinite",
+        scroll:           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
       boxShadow: {
         flame:    "0 6px 32px -4px hsl(6 85% 42% / 0.35)",

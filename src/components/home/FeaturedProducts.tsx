@@ -80,7 +80,7 @@ export function FeaturedProducts() {
               to={`/products?category=${cat.id}`}
               className={`
                 group relative bg-card border border-border/50 rounded-2xl p-6 lg:p-8
-                hover-lift card-beam overflow-hidden transition-all duration-300
+                hover:shadow-elevated hover:-translate-y-2 overflow-hidden transition-all duration-300
                 ${visible ? 'animate-fade-up' : 'opacity-0'}
               `}
               style={{ animationDelay: `${i * 100}ms` }}
