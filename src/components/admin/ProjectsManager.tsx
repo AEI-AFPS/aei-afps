@@ -134,12 +134,12 @@ export default function ProjectsManager() {
       </div>
 
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] flex flex-col p-0">
-          <DialogHeader className="p-6 pb-2 border-b">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 flex flex-col">
+          <DialogHeader className="p-6 pb-2 border-b sticky top-0 bg-background z-20">
             <DialogTitle>{editingId ? 'Edit Project' : 'New Project'}</DialogTitle>
           </DialogHeader>
           
-          <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex-1 p-6">
             <form id="project-form" onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="space-y-1.5"><Label>Project ID</Label><Input value={formData.id} onChange={e => setFormData({...formData, id: e.target.value})} disabled={!!editingId} required /></div>
@@ -249,7 +249,7 @@ export default function ProjectsManager() {
             </form>
           </div>
 
-          <div className="p-6 border-t bg-muted/10 flex justify-end gap-3 mt-auto rounded-b-lg">
+          <div className="p-6 border-t bg-muted/10 flex justify-end gap-3 mt-auto sticky bottom-0 z-20 backdrop-blur-sm">
             <Button type="button" variant="outline" onClick={handleCloseForm}>Cancel</Button>
             <Button type="submit" form="project-form" className="bg-gradient-flame text-white border-0" disabled={addMutation.isPending || updateMutation.isPending}>
               {addMutation.isPending || updateMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
@@ -259,8 +259,8 @@ export default function ProjectsManager() {
         </DialogContent>
       </Dialog>
 
-      <div className="border border-border/50 rounded-xl overflow-hidden">
-        <table className="w-full text-left text-sm">
+      <div className="border border-border/50 rounded-xl overflow-x-auto w-full">
+        <table className="w-full text-left text-sm min-w-[500px]">
           <thead className="bg-muted/50 border-b border-border/50">
             <tr>
               <th className="p-4 font-semibold">Title</th>
@@ -274,7 +274,7 @@ export default function ProjectsManager() {
               <tr><td colSpan={4} className="p-8 text-center text-muted-foreground">No projects found.</td></tr>
             ) : (
               projects?.map(p => (
-                <tr key={p.id} className="border-b border-border/50 last:border-0 hover:bg-muted/20">
+                <tr key={p.id} className="border-b border-border/50 last:border-0 hover:bg-muted/20 whitespace-nowrap">
                   <td className="p-4 font-medium">{p.title}</td>
                   <td className="p-4">{p.client}</td>
                   <td className="p-4 text-muted-foreground">{p.date}</td>

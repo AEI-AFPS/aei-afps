@@ -396,10 +396,11 @@
   }
 
   /* ── Scrollbar styling ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: hsl(218 28% 10%); }
-  ::-webkit-scrollbar-thumb { background: hsl(6 85% 42% / 0.5); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: hsl(6 85% 42% / 0.8); }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--flame-gold) / 0.6); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--flame-gold) / 0.9); }
+  * { scrollbar-width: thin; scrollbar-color: hsl(var(--flame-gold) / 0.6) transparent; }
 
   /* ── Selection colour ── */
   ::selection {

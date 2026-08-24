@@ -246,7 +246,7 @@ export default function ProjectDetail() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              to="/contact"
+              to={`/contact?type=project&name=${encodeURIComponent(project.title)}`}
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-flame text-white font-semibold rounded-xl shadow-flame hover:shadow-glow hover:scale-105 transition-all duration-200"
             >
               Get a Free Consultation

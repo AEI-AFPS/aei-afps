@@ -11,8 +11,7 @@ export const useProducts = () => {
       const { data, error } = await supabase.from('products').select('*');
       if (error) throw error;
       
-      // Map DB snake_case to frontend camelCase
-      return (data || []).map((p: any) => ({
+      const dbProducts = (data || []).map((p: any) => ({
         id: p.id,
         title: p.title,
         description: p.description,
@@ -20,6 +19,35 @@ export const useProducts = () => {
         imageUrl: p.image_url,
         features: p.features,
       })) as Product[];
+
+      const staticProducts: Product[] = [
+        {
+          id: 'dustfree-wheel-cap',
+          title: 'Dustfree Cap Type Wheel',
+          description: 'Engineered to keep wheel hubs clean and fully protected from dust and debris during heavy-duty operation.',
+          category: 'advancements',
+          imageUrl: 'https://placehold.co/600x400/png?text=Dustfree+Cap',
+          features: ['Keeps wheel hubs clean', 'Protects from dust and debris', 'Engineered for heavy-duty operation']
+        },
+        {
+          id: 'jumbo-wheel-chock',
+          title: 'Jumbo Wheel Chock',
+          description: 'Oversized chocks engineered for heavy mining vehicles — providing reliable, stable parking on uneven terrain.',
+          category: 'advancements',
+          imageUrl: 'https://placehold.co/600x400/png?text=Jumbo+Wheel+Chock',
+          features: ['Oversized for heavy mining vehicles', 'Reliable and stable parking', 'Effective on uneven terrain']
+        }
+      ];
+
+      // Only append if they don't already exist in the DB
+      const mergedProducts = [...dbProducts];
+      staticProducts.forEach(sp => {
+        if (!mergedProducts.some(p => p.id === sp.id)) {
+          mergedProducts.push(sp);
+        }
+      });
+
+      return mergedProducts;
     },
   });
 };

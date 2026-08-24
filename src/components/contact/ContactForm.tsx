@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Textarea } from '../../components/ui/textarea';
@@ -39,6 +40,20 @@ const RATE_LIMIT_MS = 30_000; // 30-second cooldown
 
 export function ContactForm() {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+  const typeParam = searchParams.get('type');
+  const nameParam = searchParams.get('name');
+
+  let initialMessage = '';
+  if (typeParam && nameParam) {
+    const typeLabel = typeParam.toLowerCase() === 'product' ? 'Product' : 'Project';
+    if (typeLabel === 'Product') {
+      initialMessage = `Enquiry Type: ${typeLabel} Interest\nItem Name: ${nameParam}\n\nHello AEI Team,\n\nI am interested in the ${nameParam} product. Please provide more information, including detailed specifications, pricing, and availability.\n\nThank you.`;
+    } else {
+      initialMessage = `Enquiry Type: ${typeLabel} Consultation\nProject Name: ${nameParam}\n\nHello AEI Team,\n\nI was reviewing the "${nameParam}" project and I am interested in a similar solution for my requirements. Please contact me to discuss this further.\n\nThank you.`;
+    }
+  }
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [cooldown, setCooldown] = useState(0);
@@ -50,7 +65,7 @@ export function ContactForm() {
     company: '',
     phone: '',
     email: '',
-    message: '',
+    message: initialMessage,
     website: '', // honeypot
   });
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -334,8 +349,8 @@ export function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           placeholder="Tell us about your requirements, machinery type, and quantity needed..."
-          rows={5}
-          maxLength={2000}
+          rows={10}
+          maxLength={7000}
           className={errors.message ? 'border-red-500 focus-visible:ring-red-500' : ''}
           required
         />
@@ -347,7 +362,7 @@ export function ContactForm() {
             </p>
           ) : <span />}
           <p className="text-muted-foreground/60 text-xs ml-auto">
-            {formData.message.length}/2000
+            {formData.message.length}/7000
           </p>
         </div>
       </div>

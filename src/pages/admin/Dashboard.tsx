@@ -5,13 +5,14 @@ import { LogOut, Package, Briefcase, Database } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ProductsManager from '../../components/admin/ProductsManager';
 import ProjectsManager from '../../components/admin/ProjectsManager';
+import { supabase } from '../../lib/supabase';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<'products' | 'projects'>('products');
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('admin_auth');
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     navigate('/admin/login');
   };
 

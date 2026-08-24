@@ -177,7 +177,7 @@ export function HeroSection() {
 
             <Link
               to="/contact"
-              className="group inline-flex items-center justify-center gap-2 px-8 py-4 glass border border-foreground/20 text-foreground font-semibold text-base rounded-xl hover:border-flame-orange/50 hover:bg-foreground/5 transition-all duration-200"
+              className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-flame text-white font-semibold text-base rounded-xl shadow-flame hover:shadow-glow hover:scale-105 active:scale-100 transition-all duration-200 overflow-hidden"
             >
               <Zap className="h-5 w-5 text-flame-orange" />
               Request a Quote
@@ -185,7 +185,7 @@ export function HeroSection() {
           </div>
 
           <div
-            className="mt-16 pt-10 border-t border-foreground/10 grid grid-cols-2 sm:grid-cols-4 gap-8 animate-fade-up"
+            className="mt-16 pt-10 mb-20 border-t border-foreground/10 grid grid-cols-2 sm:grid-cols-4 gap-8 animate-fade-up"
             style={{ animationDelay: '500ms' }}
           >
             <Stat value={20}   suffix="+" label="Years Experience" delay={0} />

@@ -20,12 +20,12 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl">
-        <DialogHeader>
+      <DialogContent className="max-w-lg max-h-[90vh] flex flex-col p-0">
+        <DialogHeader className="p-6 pb-2 border-b shrink-0">
           <DialogTitle className="font-heading text-2xl">{product.title}</DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-6">
+        <div className="flex-1 overflow-y-auto p-6 space-y-6">
           <div className="aspect-video bg-muted rounded-lg flex items-center justify-center overflow-hidden">
             {product.imageUrl && product.imageUrl !== '/placeholder.svg' ? (
               <img src={product.imageUrl} alt={product.title} className="w-full h-full object-cover" />
@@ -55,9 +55,9 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
             </div>
           )}
 
-          <div className="flex gap-4 pt-4">
+          <div className="flex gap-4 pt-4 border-t border-border/50">
             <Button variant="hero" size="lg" asChild className="flex-1">
-              <Link to="/contact" onClick={onClose}>
+              <Link to={`/contact?type=product&name=${encodeURIComponent(product.title)}`} onClick={onClose}>
                 Enquire Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

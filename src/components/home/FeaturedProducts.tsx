@@ -6,7 +6,7 @@ import { NoiseBackground } from "@/components/ui/noise-background";
 
 const categories = [
   {
-    id: 'fire-protection',
+    id: 'fire-detection',
     name: 'Fire Protection Systems',
     description: 'DGMS-approved automatic fire suppression for all HEMM types',
     icon: Flame,
@@ -74,21 +74,12 @@ export function FeaturedProducts() {
             </h2>
           </div>
           
-          {/* <Button asChild variant="outline" size="lg" className="shrink-0 self-start lg:self-auto border-flame-crimson/30 text-flame-crimson hover:bg-flame-crimson/10 hover:border-flame-crimson">
+          <Button asChild variant="outline" size="lg" className="shrink-0 self-start lg:self-auto border-flame-crimson/30 text-flame-crimson bg-gradient-flame text-white font-semibold text-sm px-5 py-2 rounded-lg shadow-flame hover:shadow-glow hover:scale-105 transition-all duration-200 border-0">
             <Link to="/products" className="flex items-center gap-2">
               View All Products
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </Button> */}
-          <NoiseBackground containerClassName="w-fit p-2 rounded-full" gradientColors={[
-            "rgb(204, 30, 10)",
-            "rgb(244, 122, 32)",
-            "rgb(245, 166, 35)",
-          ]} >
-            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-4 py-2 text-black shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
-              View All Products &rarr;
-            </button>
-          </NoiseBackground>
+          </Button>
         </div>
 
         {/* Cards */}

@@ -29,7 +29,7 @@ export interface Project {
 }
 
 export const categories = [
-  { id: 'fire-protection',     name: 'Fire Detection & Suppression', icon: 'Flame' },
+  { id: 'fire-detection',     name: 'Fire Detection & Suppression', icon: 'Flame' },
   { id: 'safety-monitoring',   name: 'Safety & Monitoring',          icon: 'Shield' },
   { id: 'proximity-detection', name: 'Proximity & Detection',        icon: 'Radar' },
   { id: 'industrial-lighting', name: 'Industrial Lighting',          icon: 'Lightbulb' },

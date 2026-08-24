@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ExternalLink, Flame } from 'lucide-react';
-import logo from '/tiff_logo.png';
+import logo from '/tiff_logo_optimized.webp';
 
 const quickLinks = [
   { name: 'Home',         path: '/' },
@@ -11,7 +11,7 @@ const quickLinks = [
 ];
 
 const productLinks = [
-  { name: 'Fire Detection Systems',  path: '/products?category=fire-protection' },
+  { name: 'Fire Detection Systems',  path: '/products?category=fire-detection' },
   { name: 'Safety & Monitoring',      path: '/products?category=safety-monitoring' },
   { name: 'Proximity Detection',      path: '/products?category=proximity-detection' },
   { name: 'Industrial Lighting',      path: '/products?category=industrial-lighting' },

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Mail, ChevronRight } from 'lucide-react';
 import { Button } from '../../components/ui/button';
-import logo from '/tiff_logo.png';
+import logo from '/tiff_logo_optimized.webp';
 import { cn } from '../../lib/utils';
 import { CONTACT_PHONE, CONTACT_EMAIL } from '../../config/contact';
 
@@ -10,7 +10,8 @@ const navLinks = [
   { name: 'Home',         path: '/' },
   { name: 'About Us',     path: '/about' },
   { name: 'Products',     path: '/products' },
-  { name: 'Projects', path: '/projects' },
+  { name: 'Advancements', path: '/advancements' },
+  { name: 'Projects',     path: '/projects' },
   { name: 'Applications', path: '/applications' },
   { name: 'Contact',      path: '/contact' },
 ];
@@ -63,14 +64,16 @@ export function Header() {
             : 'bg-background'
         )}
       >
-        <div className="container-full flex items-center justify-between">
+        <div className="container-full flex items-center justify-between py-1.5">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative">
               <img
                 src={logo}
                 alt="AEI FireGuard"
-                className="w-20 h-20 object-contain"
+                width={78}
+                height={56}
+                className="h-14 w-auto object-contain"
               />
               <div className="absolute inset-0 bg-flame-crimson/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>

@@ -12,9 +12,10 @@ export const InfiniteMovingCards = ({
   className,
 }: {
   items: {
-    quote: string;
-    name: string;
-    title: string;
+    quote?: string;
+    name?: string;
+    title?: string;
+    image?: string;
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
@@ -96,26 +97,34 @@ export const InfiniteMovingCards = ({
             key={item.name + idx}
           >
             <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
-            <div className="bg-card border border-border/50 rounded-2xl px-8 py-6 h-full relative overflow-hidden z-10">
-              <blockquote>
-                <div
-                  aria-hidden="true"
-                  className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
-                ></div>
-                <span className="relative z-20 text-sm leading-[1.6] text-foreground font-normal">
-                  {item.quote}
-                </span>
-                <div className="relative z-20 mt-6 flex flex-row items-center">
-                  <span className="flex flex-col gap-1">
-                    <span className="text-sm leading-[1.6] text-muted-foreground font-semibold">
-                      {item.name}
-                    </span>
-                    <span className="text-sm leading-[1.6] text-muted-foreground font-normal">
-                      {item.title}
-                    </span>
+            <div className="bg-card border border-border/50 rounded-2xl px-8 py-6 h-full relative overflow-hidden z-10 flex items-center justify-center">
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.name || "Client"}
+                  className="max-h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+                />
+              ) : (
+                <blockquote className="w-full">
+                  <div
+                    aria-hidden="true"
+                    className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
+                  ></div>
+                  <span className="relative z-20 text-sm leading-[1.6] text-foreground font-normal">
+                    {item.quote}
                   </span>
-                </div>
-              </blockquote>
+                  <div className="relative z-20 mt-6 flex flex-row items-center">
+                    <span className="flex flex-col gap-1">
+                      <span className="text-sm leading-[1.6] text-muted-foreground font-semibold">
+                        {item.name}
+                      </span>
+                      <span className="text-sm leading-[1.6] text-muted-foreground font-normal">
+                        {item.title}
+                      </span>
+                    </span>
+                  </div>
+                </blockquote>
+              )}
             </div>
           </li>
         ))}

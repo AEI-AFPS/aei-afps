@@ -4,6 +4,7 @@ import { Layout } from '../components/layout/Layout';
 import { ProductCard } from '../components/products/ProductCard';
 import { ProductModal } from '../components/products/ProductModal';
 import { CategoryFilter } from '../components/products/CategoryFilter';
+import { InstallationProcess } from '../components/shared/InstallationProcess';
 import { categories, Product } from '../types';
 import { useProducts } from '../lib/store';
 import { Filter, X, Package, Loader2 } from 'lucide-react';
@@ -149,6 +150,8 @@ const Products = () => {
           </div>
         </div>
       </section>
+
+      <InstallationProcess />
 
       {/* Product Modal */}
       <ProductModal

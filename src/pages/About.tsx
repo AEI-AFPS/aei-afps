@@ -14,12 +14,12 @@ const milestones = [
 ];
 
 const whyPoints = [
-  'DGMS-approved systems meeting all safety regulations',
-  'Customized solutions for all HEMM types',
-  'Quick response time for service and support',
-  'Competitive pricing without compromising quality',
-  'Experienced team of engineers and technicians',
-  'Comprehensive after-sales service and maintenance',
+  { title: '100% Resource Dedication', desc: 'Doing only this, and nothing else, for over two decades.' },
+  { title: '75% Mining Focus', desc: 'Deep domain expertise serving the mining sector.' },
+  { title: '1 of One', desc: 'The only company specializing in protecting off-road equipment from fire.' },
+  { title: 'Customizable Solutions', desc: 'We engineer to customer need, not the lowest compliance bar.' },
+  { title: '0 Conglomerate Ties', desc: 'Independent with no internal competition for resources.' },
+  { title: 'DGMS Approved', desc: 'Meeting all rigorous safety regulations and mandates.' },
 ];
 
 const About = () => {
@@ -142,12 +142,52 @@ const About = () => {
             {whyPoints.map((item, i) => (
               <div key={i} className="relative p-[2px] rounded-xl hover:-translate-y-1 transition-transform duration-200">
                 <GlowingEffect spread={20} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
-                <div className="flex items-start gap-4 p-5 bg-card border border-border/50 rounded-xl relative overflow-hidden h-full z-10">
-                  <CheckCircle className="h-5 w-5 text-flame-orange shrink-0 mt-0.5" />
-                  <p className="text-foreground text-sm lg:text-base">{item}</p>
+                <div className="flex flex-col items-start gap-2 p-5 bg-card border border-border/50 rounded-xl relative overflow-hidden h-full z-10">
+                  <div className="flex items-center gap-3 w-full">
+                    <CheckCircle className="h-5 w-5 text-flame-orange shrink-0" />
+                    <h3 className="text-foreground font-semibold text-lg">{item.title}</h3>
+                  </div>
+                  <p className="text-muted-foreground text-sm lg:text-base mt-1 ml-8">{item.desc}</p>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Leadership ── */}
+      <section className="section-padding">
+        <div className="container-full">
+          <div className="text-center mb-12">
+            <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3">Leadership</p>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground">Driven by Vision, Delivered through Experience</h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-base lg:text-lg">
+              Our executive team combines deep domain expertise with a commitment to indigenous innovation and customer-first execution. Customer satisfaction is not a metric — it is our paramount objective.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* CEO */}
+            <div className="bg-card border border-border/50 rounded-3xl p-8 text-center hover:border-flame-crimson/30 transition-colors shadow-elevated">
+              <div className="w-32 h-32 mx-auto rounded-full bg-muted border-4 border-background shadow-md flex items-center justify-center overflow-hidden mb-6">
+                <Users className="w-12 h-12 text-muted-foreground/50" />
+              </div>
+              <h3 className="font-heading text-2xl font-semibold text-foreground mb-2">Mr. A V Mallikarjun</h3>
+              <p className="text-flame-orange text-sm font-semibold uppercase tracking-wider mb-4">Chief Executive Officer</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Leads strategy, operations and innovation — championing indigenous engineering and customer-first execution.
+              </p>
+            </div>
+            {/* Managing Partner */}
+            <div className="bg-card border border-border/50 rounded-3xl p-8 text-center hover:border-flame-crimson/30 transition-colors shadow-elevated">
+              <div className="w-32 h-32 mx-auto rounded-full bg-muted border-4 border-background shadow-md flex items-center justify-center overflow-hidden mb-6">
+                <Users className="w-12 h-12 text-muted-foreground/50" />
+              </div>
+              <h3 className="font-heading text-2xl font-semibold text-foreground mb-2">Mr. M N Kishore Kumar</h3>
+              <p className="text-flame-orange text-sm font-semibold uppercase tracking-wider mb-4">Managing Partner</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Ensures operational excellence and drives sustainable growth across all our major divisions.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -182,17 +222,49 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── Global Presence ── */}
+      {/* ── Installation Process Overview ── */}
       <section className="section-padding">
         <div className="container-full">
           <div className="text-center mb-12">
-            <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3">Global Reach</p>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground">Where Our Products Are</h2>
+            <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3">Installation</p>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground">System Installation Process</h2>
             <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-base lg:text-lg">
-              Our advanced fire protection systems are securing heavy machinery across various international mining and construction hubs.
+              Engineered for each machine — installed for long-term reliability.
             </p>
           </div>
-          <Globe3DDemo />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center max-w-6xl mx-auto">
+            {[
+              { id: '1', title: 'Machine Assessment' },
+              { id: '2', title: 'Component Placement' },
+              { id: '3', title: 'Nozzle Targeting' },
+              { id: '4', title: 'Hose Routing' },
+              { id: '5', title: 'Accessible Actuators' },
+              { id: '6', title: 'Customer Validation' }
+            ].map((step) => (
+              <div key={step.id} className="flex flex-col items-center group">
+                <div className="w-12 h-12 rounded-full bg-muted border border-border flex items-center justify-center text-foreground font-bold font-heading mb-4 group-hover:bg-flame-crimson group-hover:text-white group-hover:border-flame-crimson transition-all">
+                  {step.id}
+                </div>
+                <p className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">{step.title}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Global Presence ── */}
+      <section className="section-padding overflow-hidden">
+        <div className="container-full flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
+          <div className="text-center lg:text-left flex-1 relative z-10">
+            <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3">Global Reach</p>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-foreground">Where Our Products Are</h2>
+            <p className="text-muted-foreground mt-6 max-w-2xl mx-auto lg:mx-0 text-base lg:text-lg">
+              Our advanced fire protection systems are securing heavy machinery across various international mining and construction hubs. We proudly serve industry leaders across the globe, bringing safety to the harshest environments.
+            </p>
+          </div>
+          <div className="w-full lg:w-[60%] xl:w-[65%] flex-shrink-0 -mr-4 lg:-mr-32 relative">
+            <Globe3DDemo />
+          </div>
         </div>
       </section>
 
