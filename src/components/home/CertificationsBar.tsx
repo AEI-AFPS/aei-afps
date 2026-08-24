@@ -5,6 +5,8 @@ const certifications = [
   { icon: Award,       name: 'ISO 14001:2015', description: 'Environmental Mgmt.' },
   { icon: CheckCircle, name: 'DGMS Approved',  description: 'Mines Safety Certified' },
   { icon: Star,        name: '20+ Years',      description: 'Industry Experience' },
+  { icon: Award,       name: 'MSME Approved',  description: 'Micro, Small & Medium Enterprises' },
+  { icon: Award,       name: 'IAF Approved',   description: 'International Accreditation Forum' },
 ];
 
 export function CertificationsBar() {
@@ -13,8 +15,8 @@ export function CertificationsBar() {
       {/* Flame line at top */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-flame" />
 
-      <div className="container-full py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-white/10">
+      <div className="container-full py-10">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-6 md:gap-0 md:divide-x md:divide-white/10">
           {certifications.map((cert, i) => (
             <div
               key={cert.name}

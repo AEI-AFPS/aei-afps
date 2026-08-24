@@ -145,6 +145,8 @@ export function HeroSection() {
             {[
               'ISO 9001 Certified',
               'ISO 14001 Certified',
+              'MSME Approved', 
+              'IAF Approved',
               '10000+ Installations',
               'Pan-India Service',
             ].map((item) => (
