@@ -10,7 +10,7 @@ const milestones = [
   { year: '2005', title: 'DGMS Approval',         description: 'Received first DGMS approval for fire protection systems.' },
   { year: '2010', title: 'ISO Certification',     description: 'Achieved ISO 9001 and ISO 14001 certifications.' },
   { year: '2015', title: 'Pan-India Expansion',   description: 'Extended service network across all major mining regions.' },
-  { year: '2020', title: '1000+ Installations',   description: 'Milestone of 1000+ successful system installations.' },
+  { year: '2020', title: '10000+ Installations',   description: 'Milestone of 10000+ successful system installations.' },
 ];
 
 const whyPoints = [
@@ -82,7 +82,7 @@ const About = () => {
                 <div className="relative grid grid-cols-2 gap-8">
                   {[
                     { value: '20+',  label: 'Years Experience' },
-                    { value: '1000+',label: 'Installations' },
+                    { value: '10000+',label: 'Installations' },
                     { value: '100+', label: 'Clients' },
                     { value: '24/7', label: 'Support' },
                   ].map((stat) => (

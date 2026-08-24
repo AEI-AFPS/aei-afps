@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ExternalLink, Flame } from 'lucide-react';
 import logo from '/tiff_logo_optimized.webp';
+import { CONTACT_PHONE, CONTACT_EMAIL, CONTACT_ADDRESS, COMPANY_NAME, COMPANY_DIVISION } from '../../config/contact';
 
 const quickLinks = [
   { name: 'Home',         path: '/' },
   { name: 'About Us',     path: '/about' },
   { name: 'Products',     path: '/products' },
+  { name: 'Projects',     path: '/projects' },
+  { name: 'Advancements', path: '/advancements' },
   { name: 'Applications', path: '/applications' },
   { name: 'Contact Us',   path: '/contact' },
 ];
@@ -36,10 +39,10 @@ export function Footer() {
               <img src={logo} alt="AEI FireGuard" className="w-12 h-12 object-contain" />
               <div>
                 <p className="font-heading font-semibold text-foreground text-sm leading-tight">
-                  Associated Engg. Industries
+                  {COMPANY_NAME}
                 </p>
                 <p className="text-[10px] text-flame-orange uppercase tracking-[0.2em] font-medium mt-0.5">
-                  AFPS Division
+                  {COMPANY_DIVISION}
                 </p>
               </div>
             </div>
@@ -110,27 +113,26 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-flame-orange shrink-0 mt-0.5" />
-                <span className="text-muted-foreground text-sm leading-relaxed">
-                  Uppal Industrial Area,<br />
-                  Hyderabad, Telangana 500039
+                <span className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">
+                  {CONTACT_ADDRESS}
                 </span>
               </li>
               <li>
                 <a
-                  href="tel:+91 79953 28191"
+                  href={`tel:${CONTACT_PHONE}`}
                   className="flex items-center gap-3 text-muted-foreground text-sm hover:text-flame-orange transition-colors"
                 >
                   <Phone className="h-4 w-4 text-flame-orange" />
-                  +91 79953 28191
+                  {CONTACT_PHONE}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@aei-afps.com"
+                  href={`mailto:${CONTACT_EMAIL}`}
                   className="flex items-center gap-3 text-muted-foreground text-sm hover:text-flame-orange transition-colors"
                 >
                   <Mail className="h-4 w-4 text-flame-orange" />
-                  info@aei-afps.com
+                  {CONTACT_EMAIL}
                 </a>
               </li>
             </ul>
@@ -142,7 +144,7 @@ export function Footer() {
       <div className="border-t border-border/20 relative z-10">
         <div className="container-full py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground/60">
           <p>
-            © {new Date().getFullYear()} Associated Engg. Industries. All rights reserved.
+            © {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
           </p>
           <p className="flex items-center gap-1">
             <Flame className="h-3 w-3 text-flame-crimson" />
