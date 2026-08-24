@@ -29,7 +29,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full">
       {/* ── Top Bar ──────────────────────────────────────────────────────── */}
-      <div className="bg-muted border-b border-border">
+      <div className="hidden lg:block bg-muted border-b border-border">
         <div className="container-full flex items-center justify-between py-1.5 text-xs">
           <div className="hidden md:flex items-center gap-5 text-muted-foreground">
             <a
@@ -64,16 +64,23 @@ export function Header() {
             : 'bg-background'
         )}
       >
-        <div className="container-full flex items-center justify-between py-1.5">
+        <div className={cn(
+          "container-full flex items-center justify-between transition-all duration-300",
+          scrolled ? "py-0.5" : "py-1.5"
+        )}>
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group shrink-0">
+          <Link
+            to="/"
+            className="flex items-center gap-3 group shrink-0 transition-all duration-300"
+          >
             <div className="relative">
               <img
                 src={logo}
                 alt="AEI FireGuard"
-                width={78}
-                height={56}
-                className="h-14 w-auto object-contain"
+                className={cn(
+                  "w-auto object-contain transition-all duration-300 origin-left",
+                  scrolled ? "h-11 scale-80" : "h-14 scale-100"
+                )}
               />
               <div className="absolute inset-0 bg-flame-crimson/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>

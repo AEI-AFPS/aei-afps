@@ -47,7 +47,7 @@ const Advancements = () => {
         <div className="container-full relative z-10">
           <p className="text-flame-gold text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">Future Scope</p>
           <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl text-white mb-6 animate-fade-up leading-tight max-w-4xl">
-            Next-Generation <span className="text-gradient-flame">IoT Platform</span>
+            Next-Generation <span className="text-gradient-flame">Platform</span>
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl animate-fade-up delay-200 leading-relaxed">
             We are revolutionizing heavy machinery fire protection by bridging the gap between robust mechanical systems and intelligent digital oversight.

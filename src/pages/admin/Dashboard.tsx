@@ -20,7 +20,7 @@ export default function AdminDashboard() {
     <Layout>
       <div className="bg-background min-h-screen">
         {/* Top Header */}
-        <div className="bg-card border-b border-border/50 sticky top-0 z-40">
+        <div className="bg-card border-b border-border/50 relative z-40">
           <div className="container-full flex items-center justify-between py-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-flame-crimson/10 border border-flame-crimson/20 rounded-lg flex items-center justify-center">
