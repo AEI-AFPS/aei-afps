@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useProducts, useAddProduct, useUpdateProduct, useDeleteProduct } from '../../lib/store';
-import { Product, categories } from '../../data/products';
+import { Product, categories } from '../../types';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Loader2, Plus, Edit2, Trash2, X } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
+import { ImageUpload } from './ImageUpload';
+import { ScrollArea } from '../ui/scroll-area';
 
 export default function ProductsManager() {
   const { data: products, isLoading, error } = useProducts();
@@ -91,69 +94,78 @@ export default function ProductsManager() {
         </Button>
       </div>
 
-      {isFormOpen ? (
-        <form onSubmit={handleSubmit} className="bg-muted/30 p-6 rounded-xl border border-border/50 mb-8 space-y-4">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold">{editingId ? 'Edit Product' : 'New Product'}</h3>
-            <Button variant="ghost" size="icon" type="button" onClick={handleCloseForm}><X className="h-5 w-5" /></Button>
-          </div>
+      <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] flex flex-col p-0">
+          <DialogHeader className="p-6 pb-2 border-b">
+            <DialogTitle>{editingId ? 'Edit Product' : 'New Product'}</DialogTitle>
+          </DialogHeader>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <Label>Product ID</Label>
-              <Input value={formData.id} onChange={e => setFormData({...formData, id: e.target.value})} disabled={!!editingId} required />
-            </div>
-            <div className="space-y-1.5">
-              <Label>Title</Label>
-              <Input value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} required />
-            </div>
-            <div className="space-y-1.5">
-              <Label>Category</Label>
-              <select 
-                value={formData.category} 
-                onChange={e => setFormData({...formData, category: e.target.value})}
-                className="w-full h-10 px-3 py-2 rounded-md border border-input bg-background text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                required
-              >
-                {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-              </select>
-            </div>
-            <div className="space-y-1.5">
-              <Label>Image URL</Label>
-              <Input value={formData.imageUrl} onChange={e => setFormData({...formData, imageUrl: e.target.value})} placeholder="/placeholder.svg" />
-            </div>
-          </div>
-          
-          <div className="space-y-1.5">
-            <Label>Description</Label>
-            <Textarea value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} rows={3} required />
-          </div>
-
-          <div className="space-y-2">
-            <Label>Features</Label>
-            <div className="flex gap-2">
-              <Input value={featureInput} onChange={e => setFeatureInput(e.target.value)} placeholder="Add a feature..." onKeyDown={e => { if(e.key === 'Enter') { e.preventDefault(); addFeature(); } }} />
-              <Button type="button" variant="outline" onClick={addFeature}>Add</Button>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {formData.features?.map((f, i) => (
-                <div key={i} className="flex items-center gap-1 bg-background border px-2 py-1 rounded-md text-sm">
-                  {f}
-                  <button type="button" onClick={() => removeFeature(i)} className="text-red-500 hover:text-red-700 ml-1"><X className="h-3 w-3" /></button>
+          <ScrollArea className="flex-1 p-6">
+            <form id="product-form" onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <Label>Product ID</Label>
+                  <Input value={formData.id} onChange={e => setFormData({...formData, id: e.target.value})} disabled={!!editingId} required />
                 </div>
-              ))}
-            </div>
-          </div>
+                <div className="space-y-1.5">
+                  <Label>Title</Label>
+                  <Input value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} required />
+                </div>
+                <div className="space-y-1.5">
+                  <Label>Category</Label>
+                  <select 
+                    value={formData.category} 
+                    onChange={e => setFormData({...formData, category: e.target.value})}
+                    className="w-full h-10 px-3 py-2 rounded-md border border-input bg-background text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    required
+                  >
+                    {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                  </select>
+                </div>
+              </div>
+              
+              <div className="space-y-1.5">
+                <Label>Product Cover Image</Label>
+                <ImageUpload 
+                  value={formData.imageUrl} 
+                  onChange={(url) => setFormData({...formData, imageUrl: url})} 
+                  onRemove={() => setFormData({...formData, imageUrl: ''})}
+                  folder="products"
+                />
+              </div>
+              
+              <div className="space-y-1.5">
+                <Label>Description</Label>
+                <Textarea value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} rows={3} required />
+              </div>
 
-          <div className="flex justify-end gap-3 mt-6">
+              <div className="space-y-2">
+                <Label>Features</Label>
+                <div className="flex gap-2">
+                  <Input value={featureInput} onChange={e => setFeatureInput(e.target.value)} placeholder="Add a feature..." onKeyDown={e => { if(e.key === 'Enter') { e.preventDefault(); addFeature(); } }} />
+                  <Button type="button" variant="outline" onClick={addFeature}>Add</Button>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {formData.features?.map((f, i) => (
+                    <div key={i} className="flex items-center gap-1 bg-background border px-2 py-1 rounded-md text-sm">
+                      {f}
+                      <button type="button" onClick={() => removeFeature(i)} className="text-red-500 hover:text-red-700 ml-1"><X className="h-3 w-3" /></button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </form>
+          </ScrollArea>
+          
+          <div className="p-6 border-t bg-muted/10 flex justify-end gap-3 mt-auto rounded-b-lg">
             <Button type="button" variant="outline" onClick={handleCloseForm}>Cancel</Button>
-            <Button type="submit" className="bg-gradient-flame text-white border-0" disabled={addMutation.isPending || updateMutation.isPending}>
+            <Button type="submit" form="product-form" className="bg-gradient-flame text-white border-0" disabled={addMutation.isPending || updateMutation.isPending}>
               {addMutation.isPending || updateMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
               {editingId ? 'Save Changes' : 'Create Product'}
             </Button>
           </div>
-        </form>
-      ) : null}
+        </DialogContent>
+      </Dialog>
 
       <div className="border border-border/50 rounded-xl overflow-hidden">
         <table className="w-full text-left text-sm">

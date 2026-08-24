@@ -44,15 +44,15 @@ const Contact = () => {
   return (
     <Layout>
       {/* ── Hero ── */}
-      <section className="relative bg-background py-16 md:py-24 overflow-hidden">
+      <section className="relative bg-navy-dark py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
         <div className="h-0.5 w-full bg-gradient-flame absolute top-0" />
         <div className="container-full relative z-10">
-          <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">Get In Touch</p>
-          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground mb-5 animate-fade-up leading-tight">
+          <p className="text-flame-gold text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">Get In Touch</p>
+          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-white mb-5 animate-fade-up leading-tight">
             Contact <span className="text-gradient-flame">Us</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl animate-fade-up delay-200">
+          <p className="text-lg text-white/70 max-w-2xl animate-fade-up delay-200">
             Get in touch with our team for inquiries, quotes, or technical support.
           </p>
         </div>

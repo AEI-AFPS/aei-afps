@@ -1,20 +1,39 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { Layout } from '../components/layout/Layout';
-import { projects as staticProjects } from '../data/projects';
 import { useProjects } from '../lib/store';
-import { MapPin, Calendar, Truck, ArrowLeft, CheckCircle2, Lightbulb, AlertTriangle, Wrench, Loader2 } from 'lucide-react';
-import { useEffect } from 'react';
+import { MapPin, Calendar, Truck, ArrowLeft, ArrowRight, CheckCircle2, Lightbulb, AlertTriangle, Wrench, Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Dialog, DialogContent, DialogTitle, DialogHeader } from '../components/ui/dialog';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [direction, setDirection] = useState(0);
   
   const { data: storeProjects, isLoading } = useProjects();
-  const projects = storeProjects && storeProjects.length > 0 ? storeProjects : staticProjects;
+  const projects = storeProjects || [];
   const project = projects.find((p) => p.id === id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  const handlePrevious = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedImageIndex !== null && project?.photos) {
+      setDirection(-1);
+      setSelectedImageIndex((selectedImageIndex - 1 + project.photos.length) % project.photos.length);
+    }
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedImageIndex !== null && project?.photos) {
+      setDirection(1);
+      setSelectedImageIndex((selectedImageIndex + 1) % project.photos.length);
+    }
+  };
 
   if (isLoading && !storeProjects) {
     return (
@@ -30,6 +49,45 @@ export default function ProjectDetail() {
 
   return (
     <Layout>
+      <Dialog open={selectedImageIndex !== null} onOpenChange={(open) => !open && setSelectedImageIndex(null)}>
+        <DialogContent className="max-w-7xl bg-black/95 border-0 p-0 overflow-hidden flex items-center justify-center shadow-2xl h-[90vh]">
+          <DialogHeader className="sr-only">
+            <DialogTitle>Image View</DialogTitle>
+          </DialogHeader>
+          
+          {selectedImageIndex !== null && project?.photos && project.photos.length > 0 && (
+            <div className="relative w-full h-full flex items-center justify-center group overflow-hidden">
+              <AnimatePresence initial={false} mode="wait">
+                <motion.img 
+                  key={selectedImageIndex}
+                  src={project.photos[selectedImageIndex]} 
+                  alt="Expanded view" 
+                  className="w-full max-h-[90vh] object-contain"
+                  initial={{ opacity: 0, x: direction > 0 ? 50 : -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: direction > 0 ? -50 : 50 }}
+                  transition={{ duration: 0.2 }}
+                />
+              </AnimatePresence>
+              
+              {project.photos.length > 1 && (
+                <>
+                  <button onClick={handlePrevious} className="absolute left-4 p-3 bg-black/50 text-white rounded-full hover:bg-flame-crimson transition-colors opacity-0 group-hover:opacity-100 z-50">
+                    <ArrowLeft className="w-6 h-6" />
+                  </button>
+                  <button onClick={handleNext} className="absolute right-4 p-3 bg-black/50 text-white rounded-full hover:bg-flame-crimson transition-colors opacity-0 group-hover:opacity-100 z-50">
+                    <ArrowRight className="w-6 h-6" />
+                  </button>
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 text-white rounded-full text-sm font-medium z-50">
+                    {selectedImageIndex + 1} / {project.photos.length}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
       {/* ── Back Link ── */}
       <div className="container-full pt-6">
         <Link
@@ -42,9 +100,14 @@ export default function ProjectDetail() {
       </div>
 
       {/* ── Hero Banner ── */}
-      <section className="relative bg-background py-12 md:py-16 overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
-        <div className="h-0.5 w-full bg-gradient-flame absolute top-0" />
+      <section className={`relative py-12 md:py-16 lg:py-24 overflow-hidden ${project.coverImage && project.coverImage !== '/placeholder.svg' ? 'bg-black' : 'bg-navy-dark'}`}>
+        {project.coverImage && project.coverImage !== '/placeholder.svg' && (
+          <img src={project.coverImage} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-60" />
+        )}
+        {/* <div className={`absolute inset-0 bg-gradient-to-t ${project.coverImage && project.coverImage !== '/placeholder.svg' ? 'from-black via-black/40' : 'from-navy-dark via-navy-dark/70'} to-transparent z-0 pointer-events-none`} /> */}
+        <div className={`absolute inset-0 bg-gradient-to-r ${project.coverImage && project.coverImage !== '/placeholder.svg' ? 'from-black/80 via-black/20' : 'from-navy-dark/90 via-navy-dark/40'} to-transparent z-0 pointer-events-none`} />
+        <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none z-0" />
+        <div className="h-0.5 w-full bg-gradient-flame absolute top-0 z-20" />
         <div className="container-full relative z-10">
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-5">
@@ -58,7 +121,7 @@ export default function ProjectDetail() {
             ))}
           </div>
 
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-tight">
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
             {project.title}
           </h1>
 
@@ -86,20 +149,7 @@ export default function ProjectDetail() {
         </div>
       </section>
 
-      {/* ── Hero visual placeholder ── */}
-      <div className="w-full h-64 md:h-96 bg-gradient-to-br from-navy-dark to-[#1a0a0a] relative overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-25" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white/20">
-            <Truck className="h-20 w-20 mx-auto mb-3" />
-            <p className="text-sm uppercase tracking-widest">Project Photos Coming Soon</p>
-          </div>
-        </div>
-        {/* Flame glow overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-flame-crimson/10 to-transparent pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-flame" />
-      </div>
-
+      {/* Gallery Moved to Bottom */}
       {/* ── Three columns: Challenge / Solution / Results ── */}
       <section className="section-padding">
         <div className="container-full">
@@ -144,6 +194,46 @@ export default function ProjectDetail() {
           </div>
         </div>
       </section>
+
+      {/* ── Dynamic Custom Sections ── */}
+      {project.sections && project.sections.length > 0 && (
+        <section className="py-12 border-t border-border/30 bg-muted/10">
+          <div className="container-full">
+            <div className="max-w-4xl mx-auto space-y-12">
+              {project.sections.map((section, index) => (
+                <div key={index} className="prose prose-slate dark:prose-invert max-w-none">
+                  <h3 className="font-heading text-2xl text-foreground mb-4 flex items-center gap-3">
+                    <span className="w-8 h-8 rounded-full bg-flame-crimson/10 text-flame-orange flex items-center justify-center text-sm font-bold border border-flame-crimson/20">
+                      {index + 1}
+                    </span>
+                    {section.title}
+                  </h3>
+                  <div className="text-muted-foreground leading-relaxed whitespace-pre-wrap pl-11">
+                    {section.content}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── Project Media Gallery ── */}
+      {project.photos && project.photos.length > 0 && (
+        <section className="bg-navy-dark border-y border-border/20 overflow-hidden">
+          <div className="container-full py-12">
+            <h2 className="font-heading text-2xl text-foreground mb-8 text-center">Project Gallery</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[250px] md:auto-rows-[300px]">
+              {project.photos.map((photo, i) => (
+                <div key={i} className="relative rounded-xl overflow-hidden border border-white/10 cursor-pointer group" onClick={() => setSelectedImageIndex(i)}>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-10" />
+                  <img src={photo} alt={`${project.title} gallery ${i+1}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── CTA ── */}
       <section className="relative py-14 border-t border-border/50 bg-muted/30">

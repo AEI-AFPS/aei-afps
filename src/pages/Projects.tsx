@@ -1,28 +1,27 @@
 import { Layout } from '../components/layout/Layout';
 import { Link } from 'react-router-dom';
-import { projects as staticProjects } from '../data/projects';
 import { useProjects } from '../lib/store';
 import { GlowingEffect } from '../components/ui/glowing-effect';
 import { MapPin, Calendar, Truck, ArrowRight, CheckCircle2, Award, Loader2 } from 'lucide-react';
 
 export default function Projects() {
   const { data: storeProjects, isLoading } = useProjects();
-  const projects = storeProjects && storeProjects.length > 0 ? storeProjects : staticProjects;
+  const projects = storeProjects || [];
 
   return (
     <Layout>
       {/* ── Hero ── */}
-      <section className="relative bg-background py-16 md:py-24 overflow-hidden">
+      <section className="relative bg-navy-dark py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
         <div className="h-0.5 w-full bg-gradient-flame absolute top-0" />
         <div className="container-full relative z-10">
-          <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">
+          <p className="text-flame-gold text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">
             Our Work
           </p>
-          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground mb-5 animate-fade-up leading-tight">
+          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-white mb-5 animate-fade-up leading-tight">
             Completed <span className="text-gradient-flame">Projects</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl animate-fade-up delay-200">
+          <p className="text-lg text-white/70 max-w-2xl animate-fade-up delay-200">
             Real-world deployments across India's leading mining and construction operations.
             See how AEI's fire protection systems safeguard lives and equipment.
           </p>
@@ -63,14 +62,19 @@ export default function Projects() {
 
                     {/* Cover image area */}
                     <div className="relative h-48 bg-gradient-to-br from-navy-dark to-[#1a0a0a] flex items-center justify-center overflow-hidden">
-                      <div className="absolute inset-0 grid-bg opacity-20" />
-                      <div className="absolute inset-0 bg-flame-crimson/5 group-hover:bg-flame-crimson/10 transition-colors duration-500" />
-                      {/* Decorative icon */}
-                      <div className="relative z-10 flex flex-col items-center gap-2">
-                        <div className="w-20 h-20 bg-flame-crimson/15 border border-flame-crimson/25 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <Award className="h-10 w-10 text-flame-orange" />
-                        </div>
-                      </div>
+                      {project.coverImage && project.coverImage !== '/placeholder.svg' ? (
+                        <img src={project.coverImage} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 grid-bg opacity-20" />
+                          <div className="absolute inset-0 bg-flame-crimson/5 group-hover:bg-flame-crimson/10 transition-colors duration-500" />
+                          <div className="relative z-10 flex flex-col items-center gap-2">
+                            <div className="w-20 h-20 bg-flame-crimson/15 border border-flame-crimson/25 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                              <Award className="h-10 w-10 text-flame-orange" />
+                            </div>
+                          </div>
+                        </>
+                      )}
 
                       {/* Tag chips */}
                       <div className="absolute bottom-3 left-4 flex flex-wrap gap-1.5">

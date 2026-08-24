@@ -108,8 +108,8 @@ export function HeroSection() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-flame-orange opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-flame-crimson" />
               </div>
-              <Shield className="h-4 w-4 text-flame-orange" />
-              <span className="text-flame-orange font-semibold text-xs uppercase tracking-widest">
+              <Shield className="h-4 w-4 text-flame-gold" />
+              <span className="text-flame-gold font-semibold text-xs uppercase tracking-widest">
                 DGMS Approved Systems
               </span>
             </div>
@@ -131,7 +131,7 @@ export function HeroSection() {
 
           {/* Sub-headline */}
           <p
-            className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-10 leading-relaxed max-w-3xl animate-fade-up"
+            className="text-lg md:text-xl lg:text-2xl text-white/70 mb-10 leading-relaxed max-w-3xl animate-fade-up"
             style={{ animationDelay: '200ms' }}
           >
             Protecting mining and construction equipment with cutting-edge fire

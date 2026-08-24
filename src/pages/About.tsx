@@ -26,7 +26,7 @@ const About = () => {
   return (
     <Layout>
       {/* ── Hero ── */}
-      <section className="relative bg-background py-16 md:py-24 overflow-hidden">
+      <section className="relative bg-navy-dark py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
         <div
           className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none"
@@ -35,13 +35,13 @@ const About = () => {
         <div className="h-0.5 w-full bg-gradient-flame absolute top-0" />
 
         <div className="container-full relative z-10">
-          <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">
+          <p className="text-flame-gold text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">
             Who We Are
           </p>
-          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground mb-5 animate-fade-up leading-tight">
+          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-white mb-5 animate-fade-up leading-tight">
             About <span className="text-gradient-flame">Associated Engg.</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl animate-fade-up delay-200">
+          <p className="text-lg text-white/70 max-w-3xl animate-fade-up delay-200">
             India's trusted partner for automatic fire protection systems in the mining and construction industry.
           </p>
         </div>

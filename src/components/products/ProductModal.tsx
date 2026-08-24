@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Product } from '../../data/products';
+import { Product } from '../../types';
 import { Button } from '../../components/ui/button';
 import {
   Dialog,
@@ -26,10 +26,14 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
         </DialogHeader>
         
         <div className="space-y-6">
-          <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-            <div className="w-full h-full bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center rounded-lg">
-              <span className="font-heading text-4xl text-muted-foreground/50">AEI</span>
-            </div>
+          <div className="aspect-video bg-muted rounded-lg flex items-center justify-center overflow-hidden">
+            {product.imageUrl && product.imageUrl !== '/placeholder.svg' ? (
+              <img src={product.imageUrl} alt={product.title} className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center rounded-lg">
+                <span className="font-heading text-4xl text-muted-foreground/50">AEI</span>
+              </div>
+            )}
           </div>
 
           <div>

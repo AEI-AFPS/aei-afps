@@ -49,7 +49,7 @@ const Applications = () => {
         <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
         <div className="h-0.5 w-full bg-gradient-flame absolute top-0" />
         <div className="container-full relative z-10">
-          <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">Use Cases</p>
+          <p className="text-flame-gold text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">Use Cases</p>
           <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-white mb-5 animate-fade-up leading-tight">
             <span className="text-gradient-flame">Applications</span>
           </h1>

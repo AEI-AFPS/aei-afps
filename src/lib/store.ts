@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from './supabase';
-import { Product } from '../data/products';
-import { Project } from '../data/projects';
+import { Product, Project } from '../types';
 
 // ── Products ────────────────────────────────────────────────────────────────
 

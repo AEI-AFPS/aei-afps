@@ -4,7 +4,7 @@ import { Layout } from '../components/layout/Layout';
 import { ProductCard } from '../components/products/ProductCard';
 import { ProductModal } from '../components/products/ProductModal';
 import { CategoryFilter } from '../components/products/CategoryFilter';
-import { products as staticProducts, categories, Product } from '../data/products';
+import { categories, Product } from '../types';
 import { useProducts } from '../lib/store';
 import { Filter, X, Package, Loader2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -19,7 +19,7 @@ const Products = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const { data: storeProducts, isLoading } = useProducts();
-  const allProducts = storeProducts && storeProducts.length > 0 ? storeProducts : staticProducts;
+  const allProducts = storeProducts || [];
 
   useEffect(() => {
     const category = searchParams.get('category');
@@ -50,7 +50,7 @@ const Products = () => {
         <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
         <div className="h-0.5 w-full bg-gradient-flame absolute top-0" />
         <div className="container-full relative z-10">
-          <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">Catalogue</p>
+          <p className="text-flame-gold text-sm font-semibold uppercase tracking-[0.2em] mb-3 animate-fade-down">Catalogue</p>
           <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-white mb-4 animate-fade-up leading-tight">
             Our <span className="text-gradient-flame">Products</span>
           </h1>
@@ -135,13 +135,9 @@ const Products = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 lg:gap-8">
                 {filteredProducts.map((product, i) => (
-                  <div
-                    key={product.id}
-                    className="animate-fade-up"
-                    style={{ animationDelay: `${i * 60}ms` }}
-                  >
+                  <div key={product.id} className="animate-fade-up" style={{ animationDelay: `${i * 100}ms` }}>
                     <ProductCard
                       product={product}
                       onViewDetails={setSelectedProduct}

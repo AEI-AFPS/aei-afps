@@ -1,4 +1,4 @@
-import { categories } from '../../data/products';
+import { categories } from '../../types';
 import { cn } from '../../lib/utils';
 import { Flame, Shield, Radar, Lightbulb, Sparkles } from 'lucide-react';
 
