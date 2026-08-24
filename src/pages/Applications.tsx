@@ -139,7 +139,7 @@ const Applications = () => {
             <div className="bg-flame-crimson/8 border border-flame-crimson/20 rounded-2xl p-6 lg:p-8 mb-8 flex items-start gap-4">
               <ShieldCheck className="h-7 w-7 text-flame-orange shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold text-foreground mb-1">DGMS Circular No. 05/2013</p>
+                <p className="font-semibold text-foreground mb-1">DGMS Circular No. 02/2013</p>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   Mandates installation of automatic fire detection and suppression systems on all heavy earth-moving machinery in open-cast mines.
                 </p>

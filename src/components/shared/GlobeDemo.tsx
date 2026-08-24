@@ -2,84 +2,22 @@
 import { Globe3D, GlobeMarker } from "@/components/ui/3d-globe";
 
 const sampleMarkers: GlobeMarker[] = [
-  {
-    lat: 40.7128,
-    lng: -74.006,
-    src: "https://assets.aceternity.com/avatars/1.webp",
-    label: "New York",
-  },
-  {
-    lat: 51.5074,
-    lng: -0.1278,
-    src: "https://assets.aceternity.com/avatars/2.webp",
-    label: "London",
-  },
-  {
-    lat: 35.6762,
-    lng: 139.6503,
-    src: "https://assets.aceternity.com/avatars/3.webp",
-    label: "Tokyo",
-  },
-  {
-    lat: -33.8688,
-    lng: 151.2093,
-    src: "https://assets.aceternity.com/avatars/4.webp",
-    label: "Sydney",
-  },
-  {
-    lat: 48.8566,
-    lng: 2.3522,
-    src: "https://assets.aceternity.com/avatars/5.webp",
-    label: "Paris",
-  },
-  {
-    lat: 28.6139,
-    lng: 77.209,
-    src: "https://assets.aceternity.com/avatars/6.webp",
-    label: "New Delhi",
-  },
-  {
-    lat: 55.7558,
-    lng: 37.6173,
-    src: "https://assets.aceternity.com/avatars/7.webp",
-    label: "Moscow",
-  },
-  {
-    lat: -22.9068,
-    lng: -43.1729,
-    src: "https://assets.aceternity.com/avatars/8.webp",
-    label: "Rio de Janeiro",
-  },
-  {
-    lat: 31.2304,
-    lng: 121.4737,
-    src: "https://assets.aceternity.com/avatars/9.webp",
-    label: "Shanghai",
-  },
-  {
-    lat: 25.2048,
-    lng: 55.2708,
-    src: "https://assets.aceternity.com/avatars/10.webp",
-    label: "Dubai",
-  },
-  {
-    lat: -34.6037,
-    lng: -58.3816,
-    src: "https://assets.aceternity.com/avatars/11.webp",
-    label: "Buenos Aires",
-  },
-  {
-    lat: 1.3521,
-    lng: 103.8198,
-    src: "https://assets.aceternity.com/avatars/12.webp",
-    label: "Singapore",
-  },
-  {
-    lat: 37.5665,
-    lng: 126.978,
-    src: "https://assets.aceternity.com/avatars/13.webp",
-    label: "Seoul",
-  },
+  { lat: 32.2396, lng: 77.1887, src: "/web_logo.webp", label: "Kullu Manali" },
+  { lat: 22.2587, lng: 71.1924, src: "/web_logo.webp", label: "Gujarat" },
+  { lat: 22.9734, lng: 78.6569, src: "/web_logo.webp", label: "Madhya Pradesh" },
+  { lat: 19.7515, lng: 75.7139, src: "/web_logo.webp", label: "Maharashtra" },
+  { lat: 15.2993, lng: 74.1240, src: "/web_logo.webp", label: "Goa" },
+  { lat: 15.3173, lng: 75.7139, src: "/web_logo.webp", label: "Karnataka" },
+  { lat: 17.3850, lng: 78.4867, src: "/house.svg", label: "Telangana" },
+  { lat: 15.9129, lng: 79.7400, src: "/web_logo.webp", label: "Andhra Pradesh" },
+  { lat: 11.1271, lng: 78.6569, src: "/web_logo.webp", label: "Tamil Nadu" },
+  { lat: 20.9517, lng: 85.0985, src: "/web_logo.webp", label: "Odisha" },
+  { lat: 21.2787, lng: 81.8661, src: "/web_logo.webp", label: "Chattisgarh" },
+  { lat: 23.6102, lng: 85.2799, src: "/web_logo.webp", label: "Jharkhand" },
+  { lat: 22.8046, lng: 86.2029, src: "/web_logo.webp", label: "Jamshedpur" },
+  { lat: 22.9868, lng: 87.8550, src: "/web_logo.webp", label: "West Bengal" },
+  { lat: -13.1339, lng: 27.8493, src: "/web_logo.webp", label: "Zambia" },
+  { lat: -0.7893, lng: 113.9213, src: "/web_logo.webp", label: "Indonesia" },
 ];
 
 export function Globe3DDemo() {

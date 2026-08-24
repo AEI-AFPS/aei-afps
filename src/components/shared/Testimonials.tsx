@@ -1,18 +1,29 @@
 import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
 
 const clients = [
-  { name: "BEML", image: "https://ui-avatars.com/api/?name=BEML&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "TELCON", image: "https://ui-avatars.com/api/?name=TEL&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "Gainwell", image: "https://ui-avatars.com/api/?name=GWL&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "Sany", image: "https://ui-avatars.com/api/?name=SANY&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "Scania", image: "https://ui-avatars.com/api/?name=SCA&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "SAIL", image: "https://ui-avatars.com/api/?name=SAIL&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "NMDC", image: "https://ui-avatars.com/api/?name=NMDC&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "Western Coalfields", image: "https://ui-avatars.com/api/?name=WCL&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "Northern Coalfields", image: "https://ui-avatars.com/api/?name=NCL&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "Singareni Collieries", image: "https://ui-avatars.com/api/?name=SCCL&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "TATA", image: "https://ui-avatars.com/api/?name=TATA&background=ea580c&color=fff&font-size=0.33&size=256" },
-  { name: "Hindustan Zinc", image: "https://ui-avatars.com/api/?name=HZL&background=ea580c&color=fff&font-size=0.33&size=256" },
+  { name: "BEML", image: "/clients/beml.svg" },
+  { name: "TELCON", image: "/clients/telcon.png" },
+  { name: "Gainwell", image: "/clients/gainwell.svg" },
+  { name: "Sany", image: "/clients/sany.png" },
+  { name: "Scania", image: "/clients/scania.png" },
+  { name: "SAIL", image: "/clients/sail.svg" },
+  { name: "NMDC", image: "/clients/nmdc.svg" },
+  { name: "Western Coalfields", image: "/clients/western_coalfields.svg" },
+  { name: "Northern Coalfields", image: "/clients/northern_coalfields.svg" },
+  { name: "Singareni Collieries", image: "/clients/singareni_collieries.svg" },
+  { name: "TATA", image: "/clients/tata.png" },
+  { name: "Hindustan Zinc", image: "/clients/hindustan_zinc.png" },
+  { name: "BGR Mining", image: "/clients/bgr_mining.svg" },
+  { name: "SMS", image: "/clients/sms.svg" },
+  { name: "Mahanadi Coalfields", image: "/clients/mahanadi_coalfields.png" },
+  { name: "PC Patel", image: "/clients/pc_patel.svg" },
+  { name: "Rithwik", image: "/clients/rithwik.svg" },
+  { name: "Buildcon", image: "/clients/buildcon.svg" },
+  { name: "XCMG", image: "/clients/xcmg.png" },
+  { name: "DMM", image: "/clients/dmm.svg" },
+  { name: "Dev Mining", image: "/clients/dev_mining.svg" },
+  { name: "VPR Mining", image: "/clients/vpr_mining.svg" },
+  { name: "RK Group", image: "/clients/rk_group.svg" }
 ];
 
 export function Testimonials() {

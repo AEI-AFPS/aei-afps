@@ -211,10 +211,7 @@ function Marker({
       {/* Circular image at the top */}
       <group ref={imageGroupRef} position={topPosition}>
         <Html
-          transform
           center
-          sprite
-          distanceFactor={10}
           style={{
             pointerEvents: isVisible ? "auto" : "none",
             opacity: isVisible ? 1 : 0,
@@ -223,13 +220,12 @@ function Marker({
         >
           <div
             className={cn(
-              "cursor-pointer overflow-hidden rounded-full bg-neutral-900 shadow-lg transition-transform duration-200",
-              hovered && "scale-125 shadow-xl ring-1 ring-white/50",
+              "cursor-pointer overflow-hidden bg-transparent transition-transform duration-200",
+              hovered && "scale-125",
             )}
             style={{
-              width: "8px",
-              height: "8px",
-            }}
+              width: "16px",
+              height: "16px",            }}
             onMouseEnter={handlePointerEnter}
             onMouseLeave={handlePointerLeave}
             onClick={handleClick}
@@ -237,7 +233,7 @@ function Marker({
             <img
               src={marker.src}
               alt={marker.label || "Marker"}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
               draggable={false}
             />
           </div>
@@ -405,7 +401,9 @@ function Scene({ markers, config, onMarkerClick, onMarkerHover }: SceneProps) {
 
   // Set initial camera position (pulled back to accommodate markers)
   React.useEffect(() => {
-    camera.position.set(0, 0, config.radius * 3.5);
+    // Start camera facing India (Lat: 20.5937, Lng: 78.9629)
+    const startPos = latLngToVector3(20.5937, 78.9629, config.radius * 3.5);
+    camera.position.copy(startPos);
     camera.lookAt(0, 0, 0);
   }, [camera, config.radius]);
 
@@ -516,7 +514,7 @@ export function Globe3D({
   );
 
   return (
-    <div className={cn("relative h-[500px] w-full", className)}>
+    <div className={cn("relative h-[500px] md:h-[600px] lg:h-[700px] xl:h-[800px] w-full", className)}>
       <Canvas
         gl={{
           antialias: true,

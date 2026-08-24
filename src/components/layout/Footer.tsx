@@ -53,7 +53,7 @@ export function Footer() {
             </p>
 
             <div className="flex gap-2 flex-wrap">
-              {['ISO 9001', 'ISO 14001', 'DGMS'].map((cert) => (
+              {['ISO 9001', 'ISO 14001', 'DGMS', 'MSME', 'IAF'].map((cert) => (
                 <span
                   key={cert}
                   className="inline-flex items-center gap-1 px-2.5 py-1 bg-flame-crimson/15 text-flame-orange border border-flame-crimson/25 text-[11px] font-semibold rounded-md"

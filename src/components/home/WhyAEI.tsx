@@ -46,11 +46,8 @@ export function WhyAEI() {
       <div className="container-full relative z-10" ref={ref}>
         {/* Header */}
         <div className={`text-center mb-10 lg:mb-14 ${visible ? 'animate-fade-up' : 'opacity-0'}`}>
-          <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3">
-            Why Choose Us
-          </p>
           <h2 className="font-heading text-4xl lg:text-5xl xl:text-6xl text-foreground">
-            Why Choose <span className="text-gradient-flame">AEI</span>?
+            Why Choose <span className="text-gradient-flame">US</span>?
           </h2>
           <p className="text-muted-foreground mt-4 max-w-3xl mx-auto text-base lg:text-lg">
             India's leading manufacturer of automatic fire protection systems for heavy earth-moving machinery.

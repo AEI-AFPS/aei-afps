@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
+import { DataPrefetcher } from "./components/shared/DataPrefetcher";
 
 // Admin
 import AdminLogin from "./pages/admin/Login";
@@ -19,13 +20,23 @@ import AdminDashboard from "./pages/admin/Dashboard";
 import { AdminRoute } from "./components/admin/AdminRoute";
 
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Keep data fresh for 5 minutes — prevents re-fetching on every page navigation
+      staleTime: 5 * 60 * 1000,
+      // Keep unused data in cache for 10 minutes
+      gcTime: 10 * 60 * 1000,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <DataPrefetcher />
       <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           <Route path="/" element={<Index />} />

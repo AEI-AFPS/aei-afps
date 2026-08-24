@@ -6,7 +6,7 @@ import { CheckCircle, Target, Eye, Users, Flame } from 'lucide-react';
 import { GlowingEffect } from '../components/ui/glowing-effect';
 
 const milestones = [
-  { year: '2000', title: 'Company Founded',       description: 'Established in Hyderabad with a vision to provide safety solutions.' },
+  { year: '2004', title: 'Company Founded',       description: 'Established in Hyderabad with a vision to provide safety solutions.' },
   { year: '2005', title: 'DGMS Approval',         description: 'Received first DGMS approval for fire protection systems.' },
   { year: '2010', title: 'ISO Certification',     description: 'Achieved ISO 9001 and ISO 14001 certifications.' },
   { year: '2015', title: 'Pan-India Expansion',   description: 'Extended service network across all major mining regions.' },
@@ -58,7 +58,7 @@ const About = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground text-base lg:text-lg leading-relaxed">
                 <p>
-                  Associated Engg. Industries (AEI – AFPS Division) specializes in Automatic Fire Protection Systems
+                  Associated Engineering Industries (AEI – AFPS Division) specializes in Automatic Fire Protection Systems
                   for heavy earth-moving machinery. Headquartered in Uppal, Hyderabad, we have been serving the
                   mining and construction industry for over two decades.
                 </p>
@@ -136,7 +136,7 @@ const About = () => {
         <div className="container-full">
           <div className="text-center mb-12">
             <p className="text-flame-orange text-sm font-semibold uppercase tracking-[0.2em] mb-3">Our Advantages</p>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground">Why Choose AEI?</h2>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground">Why Choose US?</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {whyPoints.map((item, i) => (
@@ -172,7 +172,7 @@ const About = () => {
                 <Users className="w-12 h-12 text-muted-foreground/50" />
               </div>
               <h3 className="font-heading text-2xl font-semibold text-foreground mb-2">Mr. A V Mallikarjun</h3>
-              <p className="text-flame-orange text-sm font-semibold uppercase tracking-wider mb-4">Chief Executive Officer</p>
+              {/* <p className="text-flame-orange text-sm font-semibold uppercase tracking-wider mb-4">Chief Executive Officer</p> */}
               <p className="text-muted-foreground text-sm leading-relaxed">
                 Leads strategy, operations and innovation — championing indigenous engineering and customer-first execution.
               </p>
@@ -183,7 +183,7 @@ const About = () => {
                 <Users className="w-12 h-12 text-muted-foreground/50" />
               </div>
               <h3 className="font-heading text-2xl font-semibold text-foreground mb-2">Mr. M N Kishore Kumar</h3>
-              <p className="text-flame-orange text-sm font-semibold uppercase tracking-wider mb-4">Managing Partner</p>
+              {/* <p className="text-flame-orange text-sm font-semibold uppercase tracking-wider mb-4">Managing Partner</p> */}
               <p className="text-muted-foreground text-sm leading-relaxed">
                 Ensures operational excellence and drives sustainable growth across all our major divisions.
               </p>
