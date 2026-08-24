@@ -304,7 +304,7 @@ export function ContactForm() {
             type="tel"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="+91 98765 43210"
+            placeholder="+91 79953 28191"
             maxLength={15}
             className={errors.phone ? 'border-red-500 focus-visible:ring-red-500' : ''}
             required
