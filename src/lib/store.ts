@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from './supabase';
-import { Product, Project } from '../types';
+import { Product, Project, TestimonialLogo } from '../types';
 
 // ── Products ────────────────────────────────────────────────────────────────
 
@@ -197,6 +197,64 @@ export const useDeleteProject = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] });
+    },
+  });
+};
+
+// ── Testimonial Logos ────────────────────────────────────────────────────────
+
+export const useTestimonialLogos = () => {
+  return useQuery({
+    queryKey: ['testimonial_logos'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('testimonial_logos')
+        .select('*')
+        .order('sort_order', { ascending: true });
+      if (error) throw error;
+      return (data || []) as TestimonialLogo[];
+    },
+  });
+};
+
+export const useAddTestimonialLogo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (logo: Omit<TestimonialLogo, 'id' | 'created_at'>) => {
+      const { error } = await supabase.from('testimonial_logos').insert(logo);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['testimonial_logos'] });
+    },
+  });
+};
+
+export const useUpdateTestimonialLogo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (logo: TestimonialLogo) => {
+      const { error } = await supabase
+        .from('testimonial_logos')
+        .update({ name: logo.name, image_url: logo.image_url, sort_order: logo.sort_order })
+        .eq('id', logo.id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['testimonial_logos'] });
+    },
+  });
+};
+
+export const useDeleteTestimonialLogo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from('testimonial_logos').delete().eq('id', id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['testimonial_logos'] });
     },
   });
 };

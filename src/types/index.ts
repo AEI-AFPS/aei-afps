@@ -28,6 +28,14 @@ export interface Project {
   sections?: { title: string; content: string }[];
 }
 
+export interface TestimonialLogo {
+  id: string;
+  name: string;
+  image_url: string;
+  sort_order: number;
+  created_at?: string;
+}
+
 export const categories = [
   { id: 'fire-detection',     name: 'Fire Detection & Suppression', icon: 'Flame' },
   { id: 'safety-monitoring',   name: 'Safety & Monitoring',          icon: 'Shield' },

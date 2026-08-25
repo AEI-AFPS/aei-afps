@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { Button } from '../../components/ui/button';
-import { LogOut, Package, Briefcase, Database } from 'lucide-react';
+import { LogOut, Package, Briefcase, Database, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ProductsManager from '../../components/admin/ProductsManager';
 import ProjectsManager from '../../components/admin/ProjectsManager';
+import TestimonialsManager from '../../components/admin/TestimonialsManager';
 import { supabase } from '../../lib/supabase';
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState<'products' | 'projects'>('products');
+  const [activeTab, setActiveTab] = useState<'products' | 'projects' | 'testimonials'>('products');
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -66,12 +67,29 @@ export default function AdminDashboard() {
                 <Briefcase className="h-4 w-4" />
                 Projects
               </button>
+              <button
+                onClick={() => setActiveTab('testimonials')}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-sm w-full ${
+                  activeTab === 'testimonials'
+                    ? 'bg-gradient-flame text-white shadow-flame'
+                    : 'bg-card text-muted-foreground hover:bg-muted hover:text-foreground border border-border/50'
+                }`}
+              >
+                <Star className="h-4 w-4" />
+                Testimonials
+              </button>
             </div>
           </aside>
 
           {/* Content Area */}
           <main className="flex-1 bg-card border border-border/50 rounded-2xl p-6 lg:p-8 shadow-elevated">
-            {activeTab === 'products' ? <ProductsManager /> : <ProjectsManager />}
+            {activeTab === 'products' ? (
+              <ProductsManager />
+            ) : activeTab === 'projects' ? (
+              <ProjectsManager />
+            ) : (
+              <TestimonialsManager />
+            )}
           </main>
         </div>
       </div>
