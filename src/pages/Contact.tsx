@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Layout } from '../components/layout/Layout';
 import { ContactForm } from '../components/contact/ContactForm';
 import { Phone, Mail, MapPin, Clock, MessageSquare } from 'lucide-react';
@@ -41,6 +43,22 @@ const contactItems = [
 ];
 
 const Contact = () => {
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    // If user came with pre-filled params (like from a Request Quote button),
+    // automatically scroll down to the form
+    if (searchParams.has('type')) {
+      const formElement = document.getElementById('contact-form');
+      if (formElement) {
+        // Small timeout ensures the page layout has settled
+        setTimeout(() => {
+          formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+      }
+    }
+  }, [searchParams]);
+
   return (
     <Layout>
       {/* ── Hero ── */}
@@ -93,7 +111,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="relative p-[2px] rounded-2xl animate-slide-left">
+            <div id="contact-form" className="relative p-[2px] rounded-2xl animate-slide-left">
               <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
               <div className="bg-card border border-border/50 rounded-2xl p-6 md:p-8 lg:p-10 shadow-elevated relative overflow-hidden h-full z-10">
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-flame z-20" />

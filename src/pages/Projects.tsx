@@ -152,7 +152,7 @@ export default function Projects() {
             Talk to our engineers about protecting your fleet with India's most trusted DGMS-approved fire protection systems.
           </p>
           <Link
-            to="/contact"
+            to="/contact?type=general"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-flame text-white font-semibold rounded-xl shadow-flame hover:shadow-glow hover:scale-105 transition-all duration-200"
           >
             Get a Free Consultation

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Layout } from '../components/layout/Layout';
-import { ProductCard } from '../components/products/ProductCard';
-import { ProductModal } from '../components/products/ProductModal';
+import { ExpandableProductGrid } from '../components/products/ExpandableProductGrid';
 import { CategoryFilter } from '../components/products/CategoryFilter';
 import { InstallationProcess } from '../components/shared/InstallationProcess';
 import { categories, Product } from '../types';
@@ -16,7 +15,7 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     searchParams.get('category')
   );
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const { data: storeProducts, isLoading } = useProducts();
@@ -136,15 +135,8 @@ const Products = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 lg:gap-8">
-                {filteredProducts.map((product, i) => (
-                  <div key={product.id} className="animate-fade-up" style={{ animationDelay: `${i * 100}ms` }}>
-                    <ProductCard
-                      product={product}
-                      onViewDetails={setSelectedProduct}
-                    />
-                  </div>
-                ))}
+              <div className="w-full">
+                <ExpandableProductGrid products={filteredProducts} />
               </div>
             </div>
           </div>
@@ -153,12 +145,6 @@ const Products = () => {
 
       <InstallationProcess />
 
-      {/* Product Modal */}
-      <ProductModal
-        product={selectedProduct}
-        isOpen={!!selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-      />
     </Layout>
   );
 };

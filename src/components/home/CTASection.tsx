@@ -55,7 +55,7 @@ export function CTASection() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            to="/contact"
+            to="/contact?type=general"
             className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-flame-crimson font-bold text-base rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-200 overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2">

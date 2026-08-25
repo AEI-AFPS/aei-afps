@@ -176,7 +176,7 @@ export function HeroSection() {
             </Link>
 
             <Link
-              to="/contact"
+              to="/contact?type=general"
               className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-flame text-white font-semibold text-base rounded-xl shadow-flame hover:shadow-glow hover:scale-105 active:scale-100 transition-all duration-200 overflow-hidden"
             >
               <Zap className="h-5 w-5 text-flame-orange" />

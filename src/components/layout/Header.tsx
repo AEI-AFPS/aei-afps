@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, Mail, ChevronRight } from 'lucide-react';
+import { Phone, Mail, Download } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import logo from '/tiff_logo_optimized.webp';
 import { cn } from '../../lib/utils';
@@ -110,10 +110,10 @@ export function Header() {
               asChild
               className="ml-3 bg-gradient-flame text-white font-semibold text-sm px-5 py-2 rounded-lg shadow-flame hover:shadow-glow hover:scale-105 transition-all duration-200 border-0"
             >
-              <Link to="/contact" className="flex items-center gap-1">
-                Get Quote
-                <ChevronRight className="h-4 w-4" />
-              </Link>
+              <a href="/aei-afps.pdf" download="aei-afps.pdf" className="flex items-center gap-2">
+                <Download className="h-4 w-4" />
+                Get Brochure
+              </a>
             </Button>
           </div>
 

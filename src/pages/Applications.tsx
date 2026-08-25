@@ -70,7 +70,7 @@ const Applications = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-9 gap-4">
             {machineryTypes.map((m, i) => (
               <div
                 key={m.name}
@@ -170,7 +170,7 @@ const Applications = () => {
             Our engineering team can design and implement fire detection & suppression systems tailored to your specific machinery and operational requirements.
           </p>
           <Link
-            to="/contact"
+            to="/contact?type=general"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-flame-crimson font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
           >
             Contact Our Experts

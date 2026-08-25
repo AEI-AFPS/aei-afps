@@ -43,16 +43,36 @@ export function ContactForm() {
   const [searchParams] = useSearchParams();
   const typeParam = searchParams.get('type');
   const nameParam = searchParams.get('name');
+  const categoryParam = searchParams.get('category');
+  const descParam = searchParams.get('desc');
 
   let initialMessage = '';
   if (typeParam && nameParam) {
     const typeLabel = typeParam.toLowerCase() === 'product' ? 'Product' : 'Project';
     if (typeLabel === 'Product') {
-      initialMessage = `Enquiry Type: ${typeLabel} Interest\nItem Name: ${nameParam}\n\nHello AEI Team,\n\nI am interested in the ${nameParam} product. Please provide more information, including detailed specifications, pricing, and availability.\n\nThank you.`;
+      const categoryLine = categoryParam ? `Category: ${categoryParam}\n` : '';
+      const descLine = descParam
+        ? `\nProduct Description:\n${descParam}\n`
+        : '';
+      initialMessage = [
+        `Enquiry Type: Product Interest`,
+        `Product Name: ${nameParam}`,
+        categoryParam ? `Category: ${categoryParam}` : null,
+        ``,
+        `Hello AEI Team,`,
+        ``,
+        `I am interested in the "${nameParam}" product and would like to request a quote.`,
+        descParam ? `\nProduct Overview:\n${descParam}` : null,
+        ``,
+        `Please provide detailed specifications, pricing, availability, and installation support information at your earliest convenience.`,
+        ``,
+        `Thank you.`,
+      ].filter((l) => l !== null).join('\n');
     } else {
-      initialMessage = `Enquiry Type: ${typeLabel} Consultation\nProject Name: ${nameParam}\n\nHello AEI Team,\n\nI was reviewing the "${nameParam}" project and I am interested in a similar solution for my requirements. Please contact me to discuss this further.\n\nThank you.`;
+      initialMessage = `Enquiry Type: Project Consultation\nProject Name: ${nameParam}\n\nHello AEI Team,\n\nI was reviewing the "${nameParam}" project and I am interested in a similar solution for my requirements. Please contact me to discuss this further.\n\nThank you.`;
     }
   }
+
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -266,7 +286,7 @@ export function ContactForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="John Doe"
+            placeholder="Krishna"
             maxLength={100}
             className={errors.name ? 'border-red-500 focus-visible:ring-red-500' : ''}
             required
@@ -325,7 +345,7 @@ export function ContactForm() {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="john@example.com"
+            placeholder="krishna@example.com"
             maxLength={200}
             className={errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}
           />
