@@ -49,8 +49,8 @@ export function ContactForm() {
   const brochuresParam = searchParams.get('brochures');
 
   const BROCHURE_LABELS: Record<string, string> = {
-    afps: 'AFPS Products Brochure (Automatic Fire Protection Systems catalogue)',
-    general: 'AEI General Brochure (Company overview & capabilities)',
+    afps: 'AFPS Products Brochure (Automatic Fire Detection & Suppression Systems catalogue)',
+    general: 'Safety and security devices for HEMMs (Catalogue)',
   };
 
   let initialMessage = '';

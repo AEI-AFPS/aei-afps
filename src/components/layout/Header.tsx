@@ -20,14 +20,14 @@ const BROCHURES = [
   {
     id: 'afps',
     label: 'AFPS Products Brochure',
-    description: 'Automatic Fire Protection Systems catalogue',
+    description: 'Automatic Fire Detection & Suppression Systems catalogue',
     file: '/aei-afps.pdf',
     filename: 'AEI-AFPS-Products-Brochure.pdf',
   },
   {
     id: 'general',
-    label: 'AEI General Brochure',
-    description: 'Company overview & capabilities',
+    label: 'Safety and security devices for HEMMs',
+    description: 'Safety and security devices for HEMMs (Catalogue)',
     file: '/aei-general.pdf',
     filename: 'AEI-General-Brochure.pdf',
   },
