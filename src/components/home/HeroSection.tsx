@@ -120,7 +120,7 @@ export function HeroSection() {
             className="font-heading text-foreground leading-[1.1] tracking-tight mb-6 animate-fade-up"
             style={{ animationDelay: '100ms' }}
           >
-            <span className="text-gradient-flame animate-glow-text block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl mb-3">
+            <span className="text-gradient-flame  block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl mb-3">
               ASSOCIATED ENGG. INDUSTRIES
             </span>
             <span className="text-white font-semibold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">Automatic Fire{' '}</span>{' '}

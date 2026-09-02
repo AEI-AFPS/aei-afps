@@ -13,6 +13,7 @@ import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import { DataPrefetcher } from "./components/shared/DataPrefetcher";
+import { WhatsAppButton } from "./components/shared/WhatsAppButton";
 
 // Admin
 import AdminLogin from "./pages/admin/Login";
@@ -58,6 +59,7 @@ const App = () => (
           
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <WhatsAppButton />
       </HashRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -46,14 +46,35 @@ export function ContactForm() {
   const categoryParam = searchParams.get('category');
   const descParam = searchParams.get('desc');
 
+  const brochuresParam = searchParams.get('brochures');
+
+  const BROCHURE_LABELS: Record<string, string> = {
+    afps: 'AFPS Products Brochure (Automatic Fire Protection Systems catalogue)',
+    general: 'AEI General Brochure (Company overview & capabilities)',
+  };
+
   let initialMessage = '';
-  if (typeParam && nameParam) {
+  if (typeParam === 'brochure' && brochuresParam) {
+    const requested = brochuresParam
+      .split(',')
+      .map(id => BROCHURE_LABELS[id.trim()])
+      .filter(Boolean);
+    const listLines = requested.map(label => `  • ${label}`).join('\n');
+    initialMessage = [
+      `Enquiry Type: Brochure Request`,
+      ``,
+      `Hello AEI Team,`,
+      ``,
+      `I would like to request the following brochure(s):`,
+      listLines,
+      ``,
+      `Please send them to my email address at your earliest convenience.`,
+      ``,
+      `Thank you.`,
+    ].join('\n');
+  } else if (typeParam && nameParam) {
     const typeLabel = typeParam.toLowerCase() === 'product' ? 'Product' : 'Project';
     if (typeLabel === 'Product') {
-      const categoryLine = categoryParam ? `Category: ${categoryParam}\n` : '';
-      const descLine = descParam
-        ? `\nProduct Description:\n${descParam}\n`
-        : '';
       initialMessage = [
         `Enquiry Type: Product Interest`,
         `Product Name: ${nameParam}`,
@@ -72,6 +93,7 @@ export function ContactForm() {
       initialMessage = `Enquiry Type: Project Consultation\nProject Name: ${nameParam}\n\nHello AEI Team,\n\nI was reviewing the "${nameParam}" project and I am interested in a similar solution for my requirements. Please contact me to discuss this further.\n\nThank you.`;
     }
   }
+
 
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -181,7 +203,7 @@ export function ContactForm() {
 
       // ── 1. WhatsApp deep-link ─────────────────────────────────────────
       const waText = [
-        `*New Enquiry — AEI FireGuard*`,
+        `*New Enquiry — AEI (AFPS DIVN)*`,
         ``,
         `*Name:* ${s.name}`,
         s.company ? `*Company:* ${s.company}` : null,
@@ -196,7 +218,7 @@ export function ContactForm() {
       window.open(waUrl, '_blank', 'noopener,noreferrer');
 
       // ── 2. Mailto fallback ────────────────────────────────────────────
-      const mailSubject = `AEI FireGuard Enquiry — ${s.name}${s.company ? ` (${s.company})` : ''}`;
+      const mailSubject = `AEI (AFPS DIVN) Enquiry — ${s.name}${s.company ? ` (${s.company})` : ''}`;
       const mailBody = [
         `Name: ${s.name}`,
         s.company ? `Company: ${s.company}` : null,
@@ -300,13 +322,14 @@ export function ContactForm() {
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="company" className="text-sm font-medium">Company Name</Label>
+          <Label htmlFor="company" className="text-sm font-medium">Company Name <span className="text-flame-crimson">*</span></Label>
           <Input
             id="company"
             name="company"
             value={formData.company}
             onChange={handleChange}
             placeholder="ABC Mining Co."
+            className={errors.name ? 'border-red-500 focus-visible:ring-red-500' : ''}
             maxLength={100}
           />
         </div>
@@ -338,16 +361,17 @@ export function ContactForm() {
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
+          <Label htmlFor="email" className="text-sm font-medium">Email Address <span className="text-flame-crimson">*</span>
+          </Label>
           <Input
             id="email"
             name="email"
             type="email"
+            className={errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}
             value={formData.email}
             onChange={handleChange}
             placeholder="krishna@example.com"
             maxLength={200}
-            className={errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}
           />
           {errors.email && (
             <p className="text-red-500 text-xs flex items-center gap-1">

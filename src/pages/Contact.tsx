@@ -46,8 +46,7 @@ const Contact = () => {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    // If user came with pre-filled params (like from a Request Quote button),
-    // automatically scroll down to the form
+    // Scroll to form when arriving from a pre-fill link (product, project, brochure request)
     if (searchParams.has('type')) {
       const formElement = document.getElementById('contact-form');
       if (formElement) {
@@ -58,6 +57,7 @@ const Contact = () => {
       }
     }
   }, [searchParams]);
+
 
   return (
     <Layout>
